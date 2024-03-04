@@ -3,12 +3,12 @@ What You See Is What I Hope You Get is a project that will contain react compone
 Todo will be grown as project continues.
 
 ### Todo
-
+- [ ] Think about basic layout for components
 - [ ] First component
 
 ### In Progress
 
-- [ ] Start exploring js/ts/react
+- [ ] Start exploring js/ts/react by watching tutorial
 
 ### Done ✓
 
