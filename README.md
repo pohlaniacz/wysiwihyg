@@ -8,7 +8,7 @@ Todo will be grown as project continues.
 
 ### In Progress
 
-- [ ] Start exploring js/ts/react by watching tutorial
+- [ ] First module/component
 
 ### Done ✓
 
