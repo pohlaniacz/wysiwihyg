@@ -1,13 +1,10 @@
 import './styles/App.css';
-import Button from "./components/layout/Button";
+import Header from "./components/editor/Header";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>My app.</p>
-          <Button />
-      </header>
+        <Header text="John Doe II"/>
     </div>
   );
 }

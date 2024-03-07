@@ -1,7 +1,7 @@
-function Header() {
+function Header(props) {
     return (
-        <div>
-            <h1>Joe Doe</h1>
+        <div className="App-header">
+            <h1>{props.text}</h1>
         </div>
     )
 }
