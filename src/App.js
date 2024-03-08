@@ -1,10 +1,12 @@
 import './styles/App.css';
 import Header from "./components/editor/Header";
+import Slider from "./components/editor/Slider";
 
 function App() {
   return (
     <div className="App">
-        <Header text="John Doe II"/>
+        <Header position="1" />
+        <Slider position="2" />
     </div>
   );
 }
