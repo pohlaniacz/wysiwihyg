@@ -1,6 +1,6 @@
-function Button() {
+function Button(props) {
     return (
-        <button>Btn1</button>
+        <button>{props.text}</button>
     )
 }
 
