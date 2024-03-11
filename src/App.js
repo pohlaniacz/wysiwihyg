@@ -10,8 +10,7 @@ function App() {
         if (item.type === "header") {
             return <Header
                 key={item.id}
-                position={item.position}
-                text={item.data.title}
+                item={item}
             >
                 <ActionButton text="up"/>
                 <ActionButton text="down" />
@@ -20,11 +19,11 @@ function App() {
         if (item.type === "slider") {
             return <Slider
                 key={item.id}
-                position={item.position}
             />
         }
-    }
-    )
+
+        return '';
+    })
 
   return (
     <div className="App">
