@@ -1,4 +1,4 @@
-import './styles/App.css';
+import './styles/App.scss';
 import Header from "./components/editor/Header";
 import Slider from "./components/editor/Slider";
 import ActionButton from "./components/layout/ActionButton";

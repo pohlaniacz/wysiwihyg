@@ -17,7 +17,15 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-image: url("../../public/images/happy-couple.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100wh;
+  h1 {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
 }
 
 .Edit-movable {
