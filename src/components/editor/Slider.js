@@ -10,6 +10,7 @@ function Slider(props) {
             <dic classname="App-slider-slide">
                 Slide3
             </dic>
+            {props.children}
         </div>
     )
 }

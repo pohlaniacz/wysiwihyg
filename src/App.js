@@ -3,6 +3,7 @@ import Header from "./components/editor/Header";
 import Slider from "./components/editor/Slider";
 import ActionButton from "./components/layout/ActionButton";
 import data from "./data"
+import EditBox from "./components/editor/EditBox";
 
 function App() {
 
@@ -12,14 +13,15 @@ function App() {
                 key={item.id}
                 item={item}
             >
-                <ActionButton text="up"/>
-                <ActionButton text="down" />
+                <EditBox />
             </Header>
         }
         if (item.type === "slider") {
             return <Slider
                 key={item.id}
-            />
+            >
+                <EditBox />
+            </Slider>
         }
 
         return '';

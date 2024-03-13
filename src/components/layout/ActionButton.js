@@ -1,9 +1,7 @@
 import Button from "./Button";
 
-function ActionButton(props) {
+export default function ActionButton(props) {
     return (
         <Button text={props.text} />
     );
 }
-
-export default ActionButton;

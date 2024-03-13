@@ -1,7 +1,8 @@
-function Button(props) {
+export default function Button(props) {
+    function handleClick() {
+        return alert("yay!");
+    }
     return (
-        <button>{props.text}</button>
+        <button onClick={handleClick}>{props.text}</button>
     )
 }
-
-export default Button;

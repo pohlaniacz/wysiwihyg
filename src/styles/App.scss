@@ -10,6 +10,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  position: relative;
 }
 
 .App-slider {
@@ -22,12 +23,17 @@
   background-position: center;
   background-size: cover;
   height: 100vh;
-  width: 100wh;
+  width: 100vw;
   h1 {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   }
 }
 
-.Edit-movable {
-
+.App-editBox {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  button {
+    margin: 0 5px;
+  }
 }
