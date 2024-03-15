@@ -5,7 +5,10 @@ Todo will be grown as project continues.
 # How to start
 Just (for now):
 
-```npm start```
+```
+npm install
+npm start
+```
 
 ### Todo
 - [ ] Think about basic layout for components

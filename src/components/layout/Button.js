@@ -3,6 +3,12 @@ export default function Button(props) {
         return alert("yay!");
     }
     return (
-        <button onClick={handleClick}>{props.text}</button>
+        <button
+            onClick={handleClick}
+            title={props.title}
+            type={props.type}
+        >
+            {props.text}
+        </button>
     )
 }
