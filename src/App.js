@@ -3,36 +3,45 @@ import Header from "./components/editor/Header";
 import Slider from "./components/editor/Slider";
 import data from "./data"
 import EditBox from "./components/editor/EditBox";
+import React from "react";
 
-function App() {
+export default function App() {
 
-    data.sort((a,b) => a.position - b.position);
+    const [blocks, setBlocks] = React.useState(data);
 
-    const blocks = data.map(item => {
-        if (item.type === "header") {
-            return <Header
-                key={item.id}
-                item={item}
-            >
-                <EditBox />
-            </Header>
-        }
-        if (item.type === "slider") {
-            return <Slider
-                key={item.id}
-            >
-                <EditBox />
-            </Slider>
-        }
+    function moveBlock() {
+        console.log('move');
 
-        return '';
-    })
+        setBlocks(prevBlocks => ({
+            prevBlocks
+        }))
 
-  return (
-    <div className="App">
-        {blocks}
-    </div>
-  );
+        // data.sort((a,b) => a.position - b.position)
+    }
+
+    // data.sort((a,b) => a.position - b.position);
+
+    return (
+        <div className="App">
+            {blocks.map(item => {
+                if (item.type === "header") {
+                    return <Header
+                        key={item.id}
+                        item={item}
+                    >
+                        <EditBox handleClick={moveBlock}/>
+                    </Header>
+                }
+                if (item.type === "slider") {
+                    return <Slider
+                        key={item.id}
+                    >
+                        <EditBox />
+                    </Slider>
+                }
+
+                return '';
+            })}
+        </div>
+    );
 }
-
-export default App;

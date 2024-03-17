@@ -1,10 +1,7 @@
 export default function Button(props) {
-    function handleClick() {
-        return alert("yay!");
-    }
     return (
         <button
-            onClick={handleClick}
+            onClick={props.handleClick}
             title={props.title}
             type={props.type}
         >

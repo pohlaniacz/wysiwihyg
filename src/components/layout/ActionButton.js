@@ -24,6 +24,7 @@ export default function ActionButton(props) {
             type={props.type}
             text={text}
             title={title}
+            handleClick={props.handleClick}
         />
     );
 }
