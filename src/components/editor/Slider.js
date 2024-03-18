@@ -1,6 +1,6 @@
-function Slider(props) {
+export default function Slider(props) {
     return (
-        <div className="App-slider">
+        <section className="App-slider" data-id={props.id}>
             <div className="App-slider-slide">
                 Slide1
             </div>
@@ -11,8 +11,6 @@ function Slider(props) {
                 Slide3
             </div>
             {props.children}
-        </div>
+        </section>
     )
 }
-
-export default Slider;

@@ -3,7 +3,7 @@ export default function Button(props) {
         <button
             onClick={props.handleClick}
             title={props.title}
-            type={props.type}
+            data-action={props.type}
         >
             {props.text}
         </button>

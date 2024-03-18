@@ -1,6 +1,6 @@
 import ActionButton from "../layout/ActionButton";
 
-function EditBox(props) {
+export default function EditBox(props) {
     return (
         <div className="App-editBox">
             <ActionButton
@@ -17,5 +17,3 @@ function EditBox(props) {
         </div>
     )
 }
-
-export default EditBox;
