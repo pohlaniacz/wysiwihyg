@@ -10,41 +10,38 @@ export default function App() {
     const [blocks, setBlocks] = React.useState(data);
 
     function moveBlock(e) {
-        console.log('move');
-        console.log(e.target.closest('section'));
+        e.stopPropagation();
 
-        setBlocks(prevBlocks => (
-            prevBlocks
-        // function moveElement(id, type, data) {
-        //     const currentElementIndex = data.findIndex(element => element.id === id);
-        //     const currentElement = data[currentElementIndex];
-        //
-        //     if (type === "up") {
-        //         if (currentElementIndex > 0) {
-        //             const previousElement = data[currentElementIndex - 1];
-        //
-        //             [previousElement.position, currentElement.position] = [currentElement.position, previousElement.position];
-        //             [data[currentElementIndex - 1], data[currentElementIndex]] = [currentElement, previousElement];
-        //         }
-        //     } else if (type === "down") {
-        //         if (currentElementIndex < data.length - 1) {
-        //             const nextElement = data[currentElementIndex + 1];
-        //
-        //             [nextElement.position, currentElement.position] = [currentElement.position, nextElement.position];
-        //             [data[currentElementIndex + 1], data[currentElementIndex]] = [currentElement, nextElement];
-        //         }
-        //     }
-        //
-        //     return data;
-        // }
-        ))
+        const id = e.target.closest('section').getAttribute('data-id');
+        const type = e.target.getAttribute('data-action');
 
-        // data.sort((a,b) => a.position - b.position)
+        setBlocks(prevBlocks => {
+            const newData = [...prevBlocks]; // Create a copy of the data array
+
+            const currentElementIndex = newData.findIndex(element => element.id === id);
+            const currentElement = newData[currentElementIndex];
+
+            if (type === "up") {
+                if (currentElementIndex > 0) {
+                    const previousElement = newData[currentElementIndex - 1];
+
+                    [previousElement.position, currentElement.position] = [currentElement.position, previousElement.position];
+                    [newData[currentElementIndex - 1], newData[currentElementIndex]] = [currentElement, previousElement];
+                }
+            } else if (type === "down") {
+                if (currentElementIndex < newData.length - 1) {
+                    const nextElement = newData[currentElementIndex + 1];
+
+                    [nextElement.position, currentElement.position] = [currentElement.position, nextElement.position];
+                    [newData[currentElementIndex + 1], newData[currentElementIndex]] = [currentElement, nextElement];
+                }
+            }
+            newData.sort((a,b) => a.position - b.position)
+
+            return newData;
+        });
+
     }
-
-    // data.sort((a,b) => a.position - b.position);
-
-    console.log(blocks);
 
     return (
         <div className="App">
@@ -60,8 +57,9 @@ export default function App() {
                 if (item.type === "slider") {
                     return <Slider
                         key={item.id}
+                        item={item}
                     >
-                        <EditBox />
+                        <EditBox handleClick={moveBlock}/>
                     </Slider>
                 }
 
