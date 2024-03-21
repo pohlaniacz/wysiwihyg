@@ -13,6 +13,10 @@ export default function ActionButton(props) {
             title = 'down';
             text = '↓';
             break;
+        case "edit":
+            title = 'edit';
+            text = '✎';
+            break;
         case "duplicate":
             title = 'duplicate';
             text = '⎘';

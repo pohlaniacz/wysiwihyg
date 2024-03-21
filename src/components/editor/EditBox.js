@@ -12,6 +12,9 @@ export default function EditBox(props) {
                 type="down"
             />
             <ActionButton
+                type="edit"
+            />
+            <ActionButton
                 type="duplicate"
             />
         </div>
