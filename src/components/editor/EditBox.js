@@ -1,4 +1,5 @@
 import ActionButton from "../layout/ActionButton";
+import Modal from "../layout/Modal";
 
 export default function EditBox(props) {
     return (
@@ -17,6 +18,7 @@ export default function EditBox(props) {
             <ActionButton
                 type="duplicate"
             />
+            <Modal />
         </div>
     )
 }
