@@ -11,13 +11,16 @@ npm start
 ```
 
 ### Todo
-- [ ] Think about basic layout for components
-- [ ] First component
-
-### In Progress
-
-- [ ] First module/component
+- [ ] Old css cleanup and switch to tailwind (for buttons etc)
+- [ ] Modal with basic form to edit at least one block
+- [ ] Return saved form to data (like `data.js`)
+- [ ] Header component form
+  - [ ] Edit text
+  - [ ] Font select for header
+  - [ ] File upload to made it available as background
 
 ### Done ✓
 
+- [x] Think about basic layout for components
+- [x] First component
 - [x] Write some stuff to Readme.md and keep `x` for future task check ;)
