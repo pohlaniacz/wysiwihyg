@@ -11,8 +11,8 @@ npm start
 ```
 
 ### Todo
-- [ ] Old css cleanup and switch to tailwind (for buttons etc)
 - [ ] Modal with basic form to edit at least one block
+- [ ] Typescript know-how
 - [ ] Return saved form to data (like `data.js`)
 - [ ] Header component form
   - [ ] Edit text
@@ -24,3 +24,4 @@ npm start
 - [x] Think about basic layout for components
 - [x] First component
 - [x] Write some stuff to Readme.md and keep `x` for future task check ;)
+- [x] Old css cleanup and switch to tailwind (for buttons etc)

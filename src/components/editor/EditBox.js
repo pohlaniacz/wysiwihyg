@@ -1,24 +1,34 @@
-import ActionButton from "../layout/ActionButton";
-import Modal from "../layout/Modal";
+import {Button, ButtonGroup} from "@material-tailwind/react";
 
 export default function EditBox(props) {
     return (
-        <div className="App-editBox">
-            <ActionButton
-                handleClick={props.handleClick}
-                type="up"
-            />
-            <ActionButton
-                handleClick={props.handleClick}
-                type="down"
-            />
-            <ActionButton
-                type="edit"
-            />
-            <ActionButton
-                type="duplicate"
-            />
-            <Modal />
-        </div>
+        <ButtonGroup className="App-editBox" color="amber">
+            <Button
+                data-action="up"
+                title="up"
+                onClick={props.handleClick}
+            >
+                up ↑
+            </Button>
+            <Button
+                data-action="down"
+                title="down"
+                onClick={props.handleClick}
+            >
+                down ↓
+            </Button>
+            <Button
+                data-action="edit"
+                title="edit"
+            >
+                edit ✎
+            </Button>
+            <Button
+                data-action="duplicate"
+                title="duplicate"
+            >
+                clone ⎘
+            </Button>
+        </ButtonGroup>
     )
 }

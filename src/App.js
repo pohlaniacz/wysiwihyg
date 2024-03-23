@@ -1,9 +1,7 @@
 import './styles/App.scss';
-import Header from "./components/editor/Header";
-import Slider from "./components/editor/Slider";
 import data from "./data"
-import EditBox from "./components/editor/EditBox";
 import React from "react";
+import Box from "./components/layout/Box";
 
 export default function App() {
 
@@ -40,29 +38,14 @@ export default function App() {
         setBlocks(newData);
     }
 
-
-
     return (
         <div className="App">
             {blocks.map(item => {
-                if (item.type === "header") {
-                    return <Header
-                        key={item.id}
-                        item={item}
-                    >
-                        <EditBox handleClick={moveBlock}/>
-                    </Header>
-                }
-                if (item.type === "slider") {
-                    return <Slider
-                        key={item.id}
-                        item={item}
-                    >
-                        <EditBox handleClick={moveBlock}/>
-                    </Slider>
-                }
-
-                return '';
+                return <Box
+                    key={item.id}
+                    item={item}
+                    handleClick={moveBlock}
+                />
             })}
         </div>
     );
