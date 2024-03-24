@@ -44,7 +44,7 @@ export default function App() {
                 return <Box
                     key={item.id}
                     item={item}
-                    handleClick={moveBlock}
+                    handleMoveBlock={moveBlock}
                 />
             })}
         </div>

@@ -6,14 +6,14 @@ export default function EditBox(props) {
             <Button
                 data-action="up"
                 title="up"
-                onClick={props.handleClick}
+                onClick={props.handleMoveBlock}
             >
                 up ↑
             </Button>
             <Button
                 data-action="down"
                 title="down"
-                onClick={props.handleClick}
+                onClick={props.handleMoveBlock}
             >
                 down ↓
             </Button>

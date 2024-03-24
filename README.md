@@ -12,7 +12,6 @@ npm start
 
 ### Todo
 - [ ] Modal with basic form to edit at least one block
-- [ ] Typescript know-how
 - [ ] Return saved form to data (like `data.js`)
 - [ ] Header component form
   - [ ] Edit text
