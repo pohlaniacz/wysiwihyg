@@ -6,18 +6,26 @@ import Modal from "./Modal";
 
 export default function Box(props) {
 
+    const [triggerOpen, setTriggerOpen] = React.useState(0);
+
+    function handleEdit(e) {
+        e.stopPropagation();
+
+        setTriggerOpen(Number(e.target.closest('section').getAttribute('data-id')));
+    }
+
     return (
         <>
             {props.item.type === "header" && (
                 <Header key={props.item.id} item={props.item}>
-                    <EditBox handleMoveBlock={props.handleMoveBlock} />
-                    <Modal />
+                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <Modal triggerOpen={props.item.id === triggerOpen} />
                 </Header>
             )}
             {props.item.type === "slider" && (
                 <Slider key={props.item.id} item={props.item}>
-                    <EditBox handleMoveBlock={props.handleMoveBlock} />
-                    <Modal />
+                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <Modal triggerOpen={props.item.id === triggerOpen}  />
                 </Slider>
             )}
         </>

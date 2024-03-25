@@ -20,6 +20,7 @@ export default function EditBox(props) {
             <Button
                 data-action="edit"
                 title="edit"
+                onClick={props.handleEdit}
             >
                 edit ✎
             </Button>

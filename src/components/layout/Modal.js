@@ -7,10 +7,14 @@ import {
     DialogFooter,
 } from "@material-tailwind/react";
 
-export default function Modal() {
+export default function Modal(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => setOpen(!open);
+    if (props.triggerOpen) {
+        // setOpen(true);
+        handleOpen();
+    }
 
     return (
         <>
