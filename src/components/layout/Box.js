@@ -4,29 +4,34 @@ import Slider from "../editor/Slider";
 import React from "react";
 import Modal from "./Modal";
 
-export default function Box(props) {
-
-    const [triggerOpen, setTriggerOpen] = React.useState(0);
+function Container({ type: ComponentType, item, handleMoveBlock }) {
+    const [openModalId, setOpenModalId] = React.useState(0);
 
     function handleEdit(e) {
         e.stopPropagation();
+        setOpenModalId(Number(e.target.closest('section').getAttribute('data-id')));
+    }
 
-        setTriggerOpen(Number(e.target.closest('section').getAttribute('data-id')));
+    function handleClose() {
+        setOpenModalId(0);
     }
 
     return (
+        <ComponentType key={item.id} item={item}>
+            <EditBox handleEdit={handleEdit} handleMoveBlock={handleMoveBlock} />
+            <Modal triggerOpen={item.id === openModalId} handleClose={handleClose} content={item.id}/>
+        </ComponentType>
+    );
+}
+
+export default function Box(props) {
+    return (
         <>
             {props.item.type === "header" && (
-                <Header key={props.item.id} item={props.item}>
-                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
-                    <Modal triggerOpen={props.item.id === triggerOpen} />
-                </Header>
+                <Container type={Header} item={props.item} handleMoveBlock={props.handleMoveBlock} />
             )}
             {props.item.type === "slider" && (
-                <Slider key={props.item.id} item={props.item}>
-                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
-                    <Modal triggerOpen={props.item.id === triggerOpen}  />
-                </Slider>
+                <Container type={Slider} item={props.item} handleMoveBlock={props.handleMoveBlock} />
             )}
         </>
     );

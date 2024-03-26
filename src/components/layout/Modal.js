@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Button,
     Dialog,
@@ -10,35 +10,38 @@ import {
 export default function Modal(props) {
     const [open, setOpen] = React.useState(false);
 
+    useEffect(() => {
+        if (props.triggerOpen) {
+            setOpen(true);
+        }
+    }, [props.triggerOpen]);
+
     const handleOpen = () => setOpen(!open);
-    if (props.triggerOpen) {
-        // setOpen(true);
-        handleOpen();
-    }
+    const handleClose = () => {
+        setOpen(false);
+        props.handleClose();
+    };
 
     return (
         <>
             <Button onClick={handleOpen} variant="gradient">
                 Open Dialog
             </Button>
-            <Dialog open={open} handler={handleOpen}>
+            <Dialog open={open} handler={handleClose}>
                 <DialogHeader>Its a simple dialog.</DialogHeader>
                 <DialogBody>
-                    The key to more success is to have a lot of pillows. Put it this way,
-                    it took me twenty five years to get these plants, twenty five years of
-                    blood sweat and tears, and I&apos;m never giving up, I&apos;m just
-                    getting started. I&apos;m up to something. Fan luv.
+                    Hi {props.content} ID!
                 </DialogBody>
                 <DialogFooter>
                     <Button
                         variant="text"
                         color="red"
-                        onClick={handleOpen}
+                        onClick={handleClose}
                         className="mr-1"
                     >
                         <span>Cancel</span>
                     </Button>
-                    <Button variant="gradient" color="green" onClick={handleOpen}>
+                    <Button variant="gradient" color="green" onClick={handleClose}>
                         <span>Confirm</span>
                     </Button>
                 </DialogFooter>
