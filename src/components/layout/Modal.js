@@ -16,7 +16,6 @@ export default function Modal(props) {
         }
     }, [props.triggerOpen]);
 
-    const handleOpen = () => setOpen(!open);
     const handleClose = () => {
         setOpen(false);
         props.handleClose();
@@ -24,9 +23,6 @@ export default function Modal(props) {
 
     return (
         <>
-            <Button onClick={handleOpen} variant="gradient">
-                Open Dialog
-            </Button>
             <Dialog open={open} handler={handleClose}>
                 <DialogHeader>Its a simple dialog.</DialogHeader>
                 <DialogBody>
