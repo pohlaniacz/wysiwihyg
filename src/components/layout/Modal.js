@@ -21,12 +21,22 @@ export default function Modal(props) {
         props.handleClose();
     };
 
+    function search(formData) {
+        const query = formData.get("query");
+        alert(`You searched for '${query}'`);
+    }
+
     return (
         <>
             <Dialog open={open} handler={handleClose}>
                 <DialogHeader>Its a simple dialog.</DialogHeader>
                 <DialogBody>
                     Hi {props.content} ID!
+
+                    <form action={search}>
+                        <input name="query"/>
+                        <button type="submit">Search</button>
+                    </form>
                 </DialogBody>
                 <DialogFooter>
                     <Button
