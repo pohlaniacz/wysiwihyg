@@ -25,12 +25,21 @@ export default function Modal(props) {
         const query = formData.get("query");
         alert(`You searched for '${query}'`);
     }
+    console.log(props);
+
+    function renderForm() {
+        if (props.type === "header") {
+            return "aaa";
+        }
+        return null;
+    }
 
     return (
         <>
             <Dialog open={open} handler={handleClose}>
                 <DialogHeader>Its a simple dialog.</DialogHeader>
                 <DialogBody>
+                    {renderForm}
                     Hi {props.content} ID!
 
                     <form action={search}>

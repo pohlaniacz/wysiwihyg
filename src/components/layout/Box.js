@@ -19,7 +19,7 @@ function Container({ type: ComponentType, item, handleMoveBlock }) {
     return (
         <ComponentType key={item.id} item={item}>
             <EditBox handleEdit={handleEdit} handleMoveBlock={handleMoveBlock} />
-            <Modal triggerOpen={item.id === openModalId} handleClose={handleClose} content={item.id}/>
+            <Modal type={item.type} triggerOpen={item.id === openModalId} handleClose={handleClose} content={item.id}/>
         </ComponentType>
     );
 }
