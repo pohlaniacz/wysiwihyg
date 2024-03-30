@@ -39,7 +39,7 @@ export default function Modal(props) {
             <Dialog open={open} handler={handleClose}>
                 <DialogHeader>Its a simple dialog.</DialogHeader>
                 <DialogBody>
-                    {renderForm}
+                    {renderForm()}
                     Hi {props.content} ID!
 
                     <form action={search}>
