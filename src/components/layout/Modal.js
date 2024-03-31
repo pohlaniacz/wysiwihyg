@@ -6,6 +6,7 @@ import {
     DialogBody,
     DialogFooter,
 } from "@material-tailwind/react";
+import Header from "../editor/Header";
 
 export default function Modal(props) {
     const [open, setOpen] = React.useState(false);
@@ -21,31 +22,38 @@ export default function Modal(props) {
         props.handleClose();
     };
 
-    function search(formData) {
-        const query = formData.get("query");
-        alert(`You searched for '${query}'`);
-    }
-    console.log(props);
-
-    function renderForm() {
-        if (props.type === "header") {
-            return "aaa";
+    const [formData, setFormData] = React.useState(
+        {
+            header: "",
         }
-        return null;
+    )
+
+    function handleChange(event) {
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                [event.target.name]: event.target.value
+            }
+        })
     }
 
     return (
         <>
             <Dialog open={open} handler={handleClose}>
-                <DialogHeader>Its a simple dialog.</DialogHeader>
+                <DialogHeader>Its a {props.type}.</DialogHeader>
                 <DialogBody>
-                    {renderForm()}
+                    {props.type === "header" && (
+                        <form>
+                            <input
+                                type="text"
+                                placeholder="Header"
+                                onChange={handleChange}
+                                name="header"
+                                value={formData.header}
+                            />
+                        </form>
+                    )}
                     Hi {props.content} ID!
-
-                    <form action={search}>
-                        <input name="query"/>
-                        <button type="submit">Search</button>
-                    </form>
                 </DialogBody>
                 <DialogFooter>
                     <Button
