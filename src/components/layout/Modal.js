@@ -6,7 +6,6 @@ import {
     DialogBody,
     DialogFooter,
 } from "@material-tailwind/react";
-import Header from "../editor/Header";
 
 export default function Modal(props) {
     const [open, setOpen] = React.useState(false);
