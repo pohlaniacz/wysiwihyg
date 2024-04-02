@@ -1,10 +1,13 @@
-import Header from "../editor/Header";
 import EditBox from "../editor/EditBox";
-import Slider from "../editor/Slider";
 import React from "react";
 import Modal from "./Modal";
+import Header from "../editor/Header";
+import Slider from "../editor/Slider";
+import ModalHeader from "../editor/modals/ModalHeader";
 
-function Container({ type: ComponentType, item, handleMoveBlock }) {
+export default function Box(props) {
+
+
     const [openModalId, setOpenModalId] = React.useState(0);
 
     function handleEdit(e) {
@@ -17,21 +20,18 @@ function Container({ type: ComponentType, item, handleMoveBlock }) {
     }
 
     return (
-        <ComponentType key={item.id} item={item}>
-            <EditBox handleEdit={handleEdit} handleMoveBlock={handleMoveBlock} />
-            <Modal type={item.type} triggerOpen={item.id === openModalId} handleClose={handleClose} content={item.id}/>
-        </ComponentType>
-    );
-}
-
-export default function Box(props) {
-    return (
         <>
             {props.item.type === "header" && (
-                <Container type={Header} item={props.item} handleMoveBlock={props.handleMoveBlock} />
+                <Header key={props.item.id} item={props.item}>
+                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <ModalHeader type={props.item.type} triggerOpen={props.item.id === openModalId} handleClose={handleClose} content={props.item.id}/>
+                </Header>
             )}
             {props.item.type === "slider" && (
-                <Container type={Slider} item={props.item} handleMoveBlock={props.handleMoveBlock} />
+                <Slider key={props.item.id} item={props.item}>
+                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <Modal type={props.item.type} triggerOpen={props.item.id === openModalId} handleClose={handleClose} content={props.item.id}/>
+                </Slider>
             )}
         </>
     );
