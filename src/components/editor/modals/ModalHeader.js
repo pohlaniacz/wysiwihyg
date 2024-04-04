@@ -28,12 +28,11 @@ export default function ModalHeader(props) {
     )
 
     function handleChange(event) {
-        setFormData(prevFormData => {
-            return {
-                ...prevFormData,
-                [event.target.name]: event.target.value
-            }
-        })
+        const {name, value} = event.target
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: value
+        }))
     }
 
     function handleSubmit(event) {
