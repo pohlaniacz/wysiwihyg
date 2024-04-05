@@ -24,6 +24,7 @@ export default function ModalHeader(props) {
     const [formData, setFormData] = React.useState(
         {
             header: "",
+            cambria: "",
         }
     )
 
@@ -53,6 +54,14 @@ export default function ModalHeader(props) {
                             name="header"
                             value={formData.header}
                         />
+                        <select
+                            value={formData.font}
+                            onChange={handleChange}
+                            name="fonr"
+                        >
+                            <option value="arial">Arial</option>
+                            <option value="cambria">Cambria</option>
+                        </select>
                         <button>Submit</button>
                     </form>
                 </DialogBody>
