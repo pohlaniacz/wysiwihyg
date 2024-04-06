@@ -24,7 +24,7 @@ export default function ModalHeader(props) {
     const [formData, setFormData] = React.useState(
         {
             header: "",
-            cambria: "",
+            font: "",
         }
     )
 
@@ -44,25 +44,46 @@ export default function ModalHeader(props) {
     return (
         <>
             <Dialog open={open} handler={handleClose}>
-                <DialogHeader>Its a {props.type}.</DialogHeader>
                 <DialogBody>
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            placeholder="Header"
-                            onChange={handleChange}
-                            name="header"
-                            value={formData.header}
-                        />
-                        <select
-                            value={formData.font}
-                            onChange={handleChange}
-                            name="fonr"
-                        >
-                            <option value="arial">Arial</option>
-                            <option value="cambria">Cambria</option>
-                        </select>
-                        <button>Submit</button>
+                    <form onSubmit={handleSubmit} className="w-full">
+                        <div className="flex flex-wrap -mx-3 mb-6">
+                            <div className="w-full px-3">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                       htmlFor="header">
+                                    Header text
+                                </label>
+                                <input
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="header"
+                                    type="text"
+                                    placeholder="Header"
+                                    onChange={handleChange}
+                                    name="header"
+                                    value={formData.header}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap -mx-3 mb-2">
+                            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                       htmlFor="font">
+                                    Font
+                                </label>
+                                <div className="relative">
+                                    <select
+                                        id="font"
+                                        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        value={formData.font}
+                                        onChange={handleChange}
+                                        name="font"
+                                    >
+                                        <option>Choose</option>
+                                        <option value="arial">Arial</option>
+                                        <option value="cambria">Cambria</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </DialogBody>
                 <DialogFooter>
@@ -74,7 +95,7 @@ export default function ModalHeader(props) {
                     >
                         <span>Cancel</span>
                     </Button>
-                    <Button variant="gradient" color="green" onClick={handleClose}>
+                    <Button variant="gradient" color="green" onClick={handleSubmit}>
                         <span>Confirm</span>
                     </Button>
                 </DialogFooter>
