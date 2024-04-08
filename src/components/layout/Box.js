@@ -24,7 +24,15 @@ export default function Box(props) {
             {props.item.type === "header" && (
                 <Header key={props.item.id} item={props.item}>
                     <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
-                    <ModalHeader type={props.item.type} triggerOpen={props.item.id === openModalId} handleClose={handleClose} content={props.item.id}/>
+                    <ModalHeader
+                        parentId={props.item.id}
+                        handleSave={props.handleSave}
+                        blocks={props.blocks}
+                        type={props.item.type}
+                        triggerOpen={props.item.id === openModalId}
+                        handleClose={handleClose}
+                        content={props.item.id}
+                    />
                 </Header>
             )}
             {props.item.type === "slider" && (

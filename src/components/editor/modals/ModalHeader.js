@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import {
     Button,
     Dialog,
-    DialogHeader,
     DialogBody,
     DialogFooter,
 } from "@material-tailwind/react";
@@ -25,6 +24,7 @@ export default function ModalHeader(props) {
         {
             header: "",
             font: "",
+            parentId: props.parentId,
         }
     )
 
@@ -38,7 +38,12 @@ export default function ModalHeader(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(formData);
+        props.handleSave(prevBlocks => prevBlocks.map(block =>
+            block.id === formData.parentId
+                ? { ...block, data: { title: formData.header } }
+                : block
+        ));
+        handleClose();
     }
 
     return (
