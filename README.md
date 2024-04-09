@@ -15,9 +15,9 @@ npm start
 - [ ] Modal with basic form to edit at least one block
 - [ ] Return saved form to data (like `data.js`)
 - [ ] Header component form
-  - [ ] Edit text
+  - [x] Edit text
   - [ ] Font select for header
-  - [ ] File upload to made it available as background
+  - [ ] Image upload as a background
 
 ### Done ✓
 

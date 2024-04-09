@@ -4,6 +4,7 @@ export default [
         type: "header",
         data: {
             title: 'Header title',
+            font: 'arial',
         },
         position: 1
     },
@@ -29,6 +30,7 @@ export default [
         type: "header",
         data: {
             title: 'Uuuu',
+            font: 'arial',
         },
         position: 3
     },

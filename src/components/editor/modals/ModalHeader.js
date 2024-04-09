@@ -9,6 +9,14 @@ import {
 export default function ModalHeader(props) {
     const [open, setOpen] = React.useState(false);
 
+    const [formData, setFormData] = React.useState(
+        {
+            title: props.item.data.title,
+            font: props.item.data.font,
+            parentId: props.item.id,
+        }
+    )
+
     useEffect(() => {
         if (props.triggerOpen) {
             setOpen(true);
@@ -19,14 +27,6 @@ export default function ModalHeader(props) {
         setOpen(false);
         props.handleClose();
     };
-
-    const [formData, setFormData] = React.useState(
-        {
-            header: "",
-            font: "",
-            parentId: props.parentId,
-        }
-    )
 
     function handleChange(event) {
         const {name, value} = event.target
@@ -40,7 +40,7 @@ export default function ModalHeader(props) {
         event.preventDefault();
         props.handleSave(prevBlocks => prevBlocks.map(block =>
             block.id === formData.parentId
-                ? { ...block, data: { title: formData.header } }
+                ? { ...block, data: { title: formData.title, font: formData.font } }
                 : block
         ));
         handleClose();
@@ -54,17 +54,17 @@ export default function ModalHeader(props) {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                       htmlFor="header">
+                                       htmlFor="title">
                                     Header text
                                 </label>
                                 <input
                                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="header"
+                                    id="title"
                                     type="text"
-                                    placeholder="Header"
+                                    placeholder="Title"
                                     onChange={handleChange}
-                                    name="header"
-                                    value={formData.header}
+                                    name="title"
+                                    value={formData.title}
                                 />
                             </div>
                         </div>
