@@ -14,6 +14,7 @@ export default function ModalHeader(props) {
             title: props.item.data.title,
             font: props.item.data.font,
             parentId: props.item.id,
+            image: props.item.image,
         }
     )
 
@@ -40,7 +41,11 @@ export default function ModalHeader(props) {
         event.preventDefault();
         props.handleSave(prevBlocks => prevBlocks.map(block =>
             block.id === formData.parentId
-                ? { ...block, data: { title: formData.title, font: formData.font } }
+                ? { ...block, data: {
+                    title: formData.title,
+                    font: formData.font,
+                    image: formData.image,
+                } }
                 : block
         ));
         handleClose();
@@ -68,7 +73,7 @@ export default function ModalHeader(props) {
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-wrap -mx-3 mb-2">
+                        <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                        htmlFor="font">
@@ -87,6 +92,22 @@ export default function ModalHeader(props) {
                                         <option value="cambria">Cambria</option>
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap -mx-3 mb-6">
+                            <div className="w-full px-3">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                       htmlFor="image">
+                                    Image file
+                                </label>
+                                <input
+                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="image"
+                                    type="file"
+                                    onChange={handleChange}
+                                    name="image"
+                                    value={formData.image}
+                                />
                             </div>
                         </div>
                     </form>
