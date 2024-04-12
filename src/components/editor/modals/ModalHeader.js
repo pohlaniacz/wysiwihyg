@@ -44,7 +44,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
                 <form onSubmit={handleSubmit} className="w-full">
                     <InputField id="title" label="Header text" name="title" value={formData.title} onChange={handleChange} />
                     <SelectField id="font" label="Font" name="font" value={formData.font} onChange={handleChange} />
-                    <InputField id="image" label="Image" name="image" type="file" onChange={handleChange} />
+                    <InputField id="image" label="Image (only if want to change)" name="image" type="file" onChange={handleChange} />
                 </form>
             </DialogBody>
             <DialogFooter>
@@ -58,7 +58,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
 const InputField = ({ id, label, type = "text", ...props }) => (
     <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
+            <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
             <input id={id} type={type} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" {...props} />
         </div>
     </div>
@@ -67,7 +67,7 @@ const InputField = ({ id, label, type = "text", ...props }) => (
 const SelectField = ({ id, label, ...props }) => (
     <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
+            <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
             <div className="relative">
                 <select id={id} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" {...props}>
                     <option>Choose</option>
