@@ -1,11 +1,22 @@
 import './styles/App.scss';
-import data from "./data"
 import React from "react";
 import Box from "./components/layout/Box";
 
 export default function App() {
 
-    const [blocks, setBlocks] = React.useState(data);
+    const [data, setData] = React.useState(null);
+    const [blocks, setBlocks] = React.useState(null);
+
+    React.useEffect(() => {
+        fetch(process.env.PUBLIC_URL + '/data.json')
+            .then(response => response.json())
+            .then(data => {
+                setData(data);
+                setBlocks(data);
+            });
+    }, []);
+
+    if (!data) return "Loading...";
 
     function moveBlock(e) {
         e.stopPropagation();
