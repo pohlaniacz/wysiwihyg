@@ -16,6 +16,16 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
     });
     useEffect(() => setOpen(triggerOpen), [triggerOpen]);
 
+    const handleSubmit = event => {
+        event.preventDefault();
+        handleSave(prevBlocks => prevBlocks.map(block =>
+            block.id === formData.parentId
+                ? { ...block, data: { title: formData.title, font: formData.font, image: formData.image } }
+                : block
+        ));
+        handleClose();
+    };
+
     const handleChange = ({ target: { name, value, files } }) => {
         if (files) {
             const reader = new FileReader();
@@ -26,16 +36,6 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
-    };
-
-    const handleSubmit = event => {
-        event.preventDefault();
-        handleSave(prevBlocks => prevBlocks.map(block =>
-            block.id === formData.parentId
-                ? { ...block, data: { title: formData.title, font: formData.font, image: formData.image } }
-                : block
-        ));
-        handleClose();
     };
 
     return (

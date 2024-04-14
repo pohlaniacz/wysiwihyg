@@ -24,12 +24,12 @@ export default function EditBox(props) {
             >
                 edit ✎
             </Button>
-            {/*<Button*/}
-            {/*    data-action="duplicate"*/}
-            {/*    title="duplicate"*/}
-            {/*>*/}
-            {/*    clone ⎘*/}
-            {/*</Button>*/}
+            <Button
+                data-action="duplicate"
+                title="duplicate"
+            >
+                clone ⎘
+            </Button>
         </ButtonGroup>
     )
 }
