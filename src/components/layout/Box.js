@@ -4,11 +4,19 @@ import Modal from "./Modal";
 import Header from "../editor/Header";
 import Slider from "../editor/Slider";
 import ModalHeader from "../editor/modals/ModalHeader";
+import WebFont from "webfontloader";
 
 export default function Box(props) {
 
-
     const [openModalId, setOpenModalId] = React.useState(0);
+
+    const handleFontChange = (newFont) => {
+        WebFont.load({
+            google: {
+                families: [newFont]
+            },
+        });
+    };
 
     function handleEdit(e) {
         e.stopPropagation();
@@ -30,6 +38,7 @@ export default function Box(props) {
                         triggerOpen={props.item.id === openModalId}
                         handleClose={handleClose}
                         item={props.item}
+                        handleFontChange={handleFontChange}
                     />
                 </Header>
             )}

@@ -6,7 +6,7 @@ import {
     DialogFooter,
 } from "@material-tailwind/react";
 
-export default function ModalHeader({ item, triggerOpen, handleClose, handleSave }) {
+export default function ModalHeader({ item, triggerOpen, handleClose, handleSave, handleFontChange }) {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: item.data.title,
@@ -35,6 +35,9 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
             reader.readAsDataURL(files[0]);
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
+        }
+        if (name === "font") {
+            handleFontChange(value);
         }
     };
 
@@ -71,8 +74,9 @@ const SelectField = ({ id, label, ...props }) => (
             <div className="relative">
                 <select id={id} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" {...props}>
                     <option>Choose</option>
-                    <option value="arial">Arial</option>
-                    <option value="cambria">Cambria</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Cambria">Cambria</option>
+                    <option value="Parisienne">Parisienne</option>
                 </select>
             </div>
         </div>

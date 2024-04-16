@@ -1,13 +1,11 @@
 import './styles/App.scss';
 import React from "react";
 import Box from "./components/layout/Box";
-import WebFont from 'webfontloader';
 
 export default function App() {
 
     const [data, setData] = React.useState(null);
     const [blocks, setBlocks] = React.useState(null);
-    const [font, setFont] = React.useState('Roboto');
 
     React.useEffect(() => {
         fetch(process.env.PUBLIC_URL + '/data.json')
@@ -19,19 +17,6 @@ export default function App() {
     }, []);
 
     if (!data) return "Loading...";
-
-
-    const handleFontChange = (event) => {
-        const newFont = event.target.value;
-        WebFont.load({
-            google: {
-                families: [newFont]
-            },
-            active: () => {
-                setFont(newFont);
-            }
-        });
-    };
 
     function moveBlock(e) {
         e.stopPropagation();
