@@ -11,7 +11,7 @@ npm start
 ```
 
 ### Demo
-https://6620351a73bf91a48bb4315b--scintillating-pastelito-14fc18.netlify.app/
+https://wysiwihyg.netlify.app/
 
 ### Todo
 - [ ] Modal with basic form to edit at least one block
