@@ -10,7 +10,8 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: item.data.title,
-        font: item.data.font,
+        fontName: item.data.font.name,
+        fontSize: item.data.font.size,
         parentId: item.id,
         image: item.data.image,
     });
@@ -20,7 +21,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         event.preventDefault();
         handleSave(prevBlocks => prevBlocks.map(block =>
             block.id === formData.parentId
-                ? { ...block, data: { title: formData.title, font: formData.font, image: formData.image } }
+                ? { ...block, data: { title: formData.title, font: {name: formData.fontName, size: formData.fontSize}, image: formData.image } }
                 : block
         ));
         handleClose();
@@ -36,7 +37,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
-        if (name === "font") {
+        if (name === "fontName") {
             handleFontChange(value);
         }
     };
@@ -46,7 +47,8 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
             <DialogBody>
                 <form onSubmit={handleSubmit} className="w-full">
                     <InputField id="title" label="Header text" name="title" value={formData.title} onChange={handleChange} />
-                    <SelectField id="font" label="Font" name="font" value={formData.font} onChange={handleChange} />
+                    <SelectField id="fontName" label="Font Name" name="fontName" value={formData.fontName} onChange={handleChange} />
+                    <InputField id="fontSize" label="Font Size" name="fontSize" type="number" value={formData.fontSize} onChange={handleChange} />
                     <InputField id="image" label="Image (only if want to change)" name="image" type="file" onChange={handleChange} />
                 </form>
             </DialogBody>
@@ -77,6 +79,7 @@ const SelectField = ({ id, label, ...props }) => (
                     <option value="Arial">Arial</option>
                     <option value="Cambria">Cambria</option>
                     <option value="Parisienne">Parisienne</option>
+                    <option value="Roboto">Roboto</option>
                 </select>
             </div>
         </div>
