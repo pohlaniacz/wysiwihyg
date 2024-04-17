@@ -10,7 +10,7 @@ npm install
 npm start
 ```
 
-### Demo
+### Demo [![Netlify Status](https://api.netlify.com/api/v1/badges/9894d085-fc24-496f-bda5-8f3d1c315cb8/deploy-status)](https://app.netlify.com/sites/wysiwihyg/deploys)
 https://wysiwihyg.netlify.app/
 
 ### Todo
