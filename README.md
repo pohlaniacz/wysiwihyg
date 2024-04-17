@@ -1,4 +1,3 @@
-### About
 ![alt text](https://raw.githubusercontent.com/pohlaniacz/wysiwihyg/main/public/logo.png)
 What You See Is What I Hope You Get is a project that will contain react components which can by used to build simple site.
 Todo will be grown as project continues.
