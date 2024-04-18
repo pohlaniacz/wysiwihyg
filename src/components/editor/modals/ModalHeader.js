@@ -9,9 +9,12 @@ import {
 export default function ModalHeader({ item, triggerOpen, handleClose, handleSave, handleFontChange }) {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
-        title: item.data.title,
-        fontName: item.data.font.name,
-        fontSize: item.data.font.size,
+        firstLineText: item.data.firstLine.text,
+        firstLineFontName: item.data.firstLine.font.name,
+        firstLineFontSize: item.data.firstLine.font.size,
+        secondLineText: item.data.secondLine.text,
+        secondLineFontName: item.data.secondLine.font.name,
+        secondTextFontSize: item.data.secondLine.font.size,
         parentId: item.id,
         image: item.data.image,
     });
@@ -21,7 +24,23 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         event.preventDefault();
         handleSave(prevBlocks => prevBlocks.map(block =>
             block.id === formData.parentId
-                ? { ...block, data: { title: formData.title, font: {name: formData.fontName, size: formData.fontSize}, image: formData.image } }
+                ? { ...block, data: {
+                    image: formData.image,
+                    firstLine: {
+                        text: formData.firstLineText,
+                        font: {
+                            name: formData.firstLineFontName,
+                            size: formData.firstLineFontSize
+                        }
+                    },
+                    secondLine: {
+                        text: formData.secondLineText,
+                        font: {
+                            name: formData.secondLineFontName,
+                            size: formData.secondTextFontSize
+                        }
+                    },
+                } }
                 : block
         ));
         handleClose();
@@ -37,7 +56,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
-        if (name === "fontName") {
+        if (name === "firstLineFontName" || name === "secondLineFontName") {
             handleFontChange(value);
         }
     };
@@ -46,10 +65,24 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         <Dialog open={open} handler={handleClose}>
             <DialogBody>
                 <form onSubmit={handleSubmit} className="w-full">
-                    <InputField id="title" label="Header text" name="title" value={formData.title} onChange={handleChange} />
-                    <SelectField id="fontName" label="Font Name" name="fontName" value={formData.fontName} onChange={handleChange} />
-                    <InputField id="fontSize" label="Font Size" name="fontSize" type="number" value={formData.fontSize} onChange={handleChange} />
-                    <InputField id="image" label="Image (only if want to change)" name="image" type="file" onChange={handleChange} />
+                    <div>
+                        <InputField id="firstLineText" label="Header text" name="firstLineText"
+                                    value={formData.firstLineText} onChange={handleChange}/>
+                        <SelectField id="firstLineFontName" label="Font Name" name="firstLineFontName"
+                                     value={formData.firstLineFontName} onChange={handleChange}/>
+                        <InputField id="firstLineFontSize" label="Font Size" name="firstLineFontSize"
+                                    type="number" value={formData.firstLineFontSize} onChange={handleChange}/>
+                    </div>
+                    <div>
+                        <InputField id="secondLineText" label="Header text" name="secondLineText"
+                                    value={formData.secondLineText} onChange={handleChange}/>
+                        <SelectField id="secondLineFontName" label="Font Name" name="secondLineFontName"
+                                     value={formData.secondLineFontName} onChange={handleChange}/>
+                        <InputField id="secondTextFontSize" label="Font Size" name="secondTextFontSize"
+                                    type="number" value={formData.secondTextFontSize} onChange={handleChange}/>
+                    </div>
+                    <InputField id="image" label="Image (only if want to change)" name="image" type="file"
+                                onChange={handleChange}/>
                 </form>
             </DialogBody>
             <DialogFooter>
@@ -60,7 +93,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
     );
 }
 
-const InputField = ({ id, label, type = "text", ...props }) => (
+const InputField = ({id, label, type = "text", ...props}) => (
     <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full px-3">
             <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
