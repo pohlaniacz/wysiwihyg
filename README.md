@@ -14,12 +14,7 @@ npm start
 https://wysiwihyg.netlify.app
 
 ### Todo
-- [ ] Modal with basic form to edit at least one block
 - [ ] Return saved form to data (like `data.js`)
-- [ ] Header component form
-  - [x] Edit text
-  - [ ] Font select for header
-  - [ ] Image upload as a background
 
 ### Done ✓
 
@@ -27,3 +22,8 @@ https://wysiwihyg.netlify.app
 - [x] First component
 - [x] Write some stuff to Readme.md and keep `x` for future task check ;)
 - [x] Old css cleanup and switch to tailwind (for buttons etc)
+- [x] Modal with basic form to edit at least one block
+- [x] Header component form
+  - [x] Edit text
+  - [x] Font select for header
+  - [x] Image upload as a background
