@@ -14,6 +14,7 @@ npm start
 https://wysiwihyg.netlify.app
 
 ### Todo
+- [ ] Two columns component, with two headers, pictures and paragraph
 - [ ] Return saved form to data (like `data.js`)
 
 ### Done ✓

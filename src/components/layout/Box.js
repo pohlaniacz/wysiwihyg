@@ -5,6 +5,7 @@ import Header from "../editor/Header";
 import Slider from "../editor/Slider";
 import ModalHeader from "../editor/modals/ModalHeader";
 import WebFont from "webfontloader";
+import TwoColumns from "../editor/TwoColumns";
 
 export default function Box(props) {
 
@@ -47,6 +48,12 @@ export default function Box(props) {
                     <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
                     <Modal type={props.item.type} triggerOpen={props.item.id === openModalId} handleClose={handleClose} content={props.item.id}/>
                 </Slider>
+            )}
+            {props.item.type === "two-columns" && (
+                <TwoColumns key={props.item.id} item={props.item}>
+                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    {/*<Modal type={props.item.type} triggerOpen={props.item.id === openModalId} handleClose={handleClose} content={props.item.id}/>*/}
+                </TwoColumns>
             )}
         </>
     );
