@@ -14,7 +14,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         firstLineFontSize: item.data.firstLine.font.size,
         secondLineText: item.data.secondLine.text,
         secondLineFontName: item.data.secondLine.font.name,
-        secondTextFontSize: item.data.secondLine.font.size,
+        secondLineTextFontSize: item.data.secondLine.font.size,
         parentId: item.id,
         image: item.data.image,
     });
@@ -37,7 +37,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
                         text: formData.secondLineText,
                         font: {
                             name: formData.secondLineFontName,
-                            size: formData.secondTextFontSize
+                            size: formData.secondLineTextFontSize
                         }
                     },
                 } }
@@ -78,8 +78,8 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
                                     value={formData.secondLineText} onChange={handleChange}/>
                         <SelectField id="secondLineFontName" label="Font Name" name="secondLineFontName"
                                      value={formData.secondLineFontName} onChange={handleChange}/>
-                        <InputField id="secondTextFontSize" label="Font Size" name="secondTextFontSize"
-                                    type="number" value={formData.secondTextFontSize} onChange={handleChange}/>
+                        <InputField id="secondLineTextFontSize" label="Font Size" name="secondLineTextFontSize"
+                                    type="number" value={formData.secondLineTextFontSize} onChange={handleChange}/>
                     </div>
                     <InputField id="image" label="Image (only if want to change)" name="image" type="file"
                                 onChange={handleChange}/>

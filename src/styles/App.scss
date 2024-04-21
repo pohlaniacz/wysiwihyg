@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-header, .App-slider {
+.App > section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,9 @@
   color: white;
   position: relative;
 }
-
+section.App-twoColumns {
+  color: #222;
+}
 .App-slider {
   background-color: #2e3428;
 }

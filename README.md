@@ -15,6 +15,8 @@ https://wysiwihyg.netlify.app
 
 ### Todo
 - [ ] Two columns component, with two headers, pictures and paragraph
+  - [ ] Fix modal savings
+- [ ] Make component (?) for font stuff
 - [ ] Return saved form to data (like `data.js`)
 
 ### Done ✓
