@@ -5,6 +5,8 @@ import {
     DialogBody,
     DialogFooter,
 } from "@material-tailwind/react";
+import InputField from "./form/InputField";
+import SelectField from "./form/SelectField";
 
 export default function ModalTwoColumns({ item, triggerOpen, handleClose, handleSave, handleFontChange }) {
     const [open, setOpen] = useState(false);
@@ -108,56 +110,66 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
     return (
         <Dialog open={open} handler={handleClose}>
             <DialogBody>
-                <form onSubmit={handleSubmit} className="w-full">
+                <form onSubmit={handleSubmit} className="w-full overflow-y-scroll">
                     <div>
                         <InputField id="oneFirstLineText" label="Header text" name="oneFrstLineText"
                                     value={formData.oneFirstLineText} onChange={handleChange}/>
-                        <SelectField id="oneFirstLineFontName" label="Font Name" name="oneFirstLineFontName"
-                                     value={formData.oneFirstLineFontName} onChange={handleChange}/>
-                        <InputField id="oneFirstLineFontSize" label="Font Size" name="oneFirstLineFontSize"
-                                    type="number" value={formData.oneFirstLineFontSize} onChange={handleChange}/>
+                        <div className="grid grid-cols-2 gap-4">
+                            <SelectField id="oneFirstLineFontName" label="Font Name" name="oneFirstLineFontName"
+                                         value={formData.oneFirstLineFontName} onChange={handleChange}/>
+                            <InputField id="oneFirstLineFontSize" label="Font Size" name="oneFirstLineFontSize"
+                                        type="number" value={formData.oneFirstLineFontSize} onChange={handleChange}/>
+                        </div>
                     </div>
                     <div>
                         <InputField id="oneSecondLineText" label="Header text" name="oneSecondLineText"
                                     value={formData.oneSecondLineText} onChange={handleChange}/>
-                        <SelectField id="oneSecondLineFontName" label="Font Name" name="oneSecondLineFontName"
-                                     value={formData.oneSecondLineFontName} onChange={handleChange}/>
-                        <InputField id="oneSecondLineFontSize" label="Font Size" name="oneSecondLineFontSize"
-                                    type="number" value={formData.oneSecondLineFontSize} onChange={handleChange}/>
+                        <div className="grid grid-cols-2 gap-4">
+                            <SelectField id="oneSecondLineFontName" label="Font Name" name="oneSecondLineFontName"
+                                         value={formData.oneSecondLineFontName} onChange={handleChange}/>
+                            <InputField id="oneSecondLineFontSize" label="Font Size" name="oneSecondLineFontSize"
+                                        type="number" value={formData.oneSecondLineFontSize} onChange={handleChange}/>
+                        </div>
                     </div>
                     <div>
                         <InputField id="oneParagraphText" label="Header text" name="oneParagraphText"
                                     value={formData.oneParagraphText} onChange={handleChange}/>
-                        <SelectField id="oneParagraphFontName" label="Font Name" name="oneParagraphFontName"
-                                     value={formData.oneParagraphFontName} onChange={handleChange}/>
-                        <InputField id="oneParagraphFontSize" label="Font Size" name="oneParagraphFontSize"
-                                    type="number" value={formData.oneParagraphFontSize} onChange={handleChange}/>
+                        <div className="grid grid-cols-2 gap-4">
+                            <SelectField id="oneParagraphFontName" label="Font Name" name="oneParagraphFontName"
+                                         value={formData.oneParagraphFontName} onChange={handleChange}/>
+                            <InputField id="oneParagraphFontSize" label="Font Size" name="oneParagraphFontSize"
+                                        type="number" value={formData.oneParagraphFontSize} onChange={handleChange}/>
+                        </div>
                     </div>
-                    <hr/>
-
                     <div>
                         <InputField id="twoFirstLineText" label="Header text" name="twoFrstLineText"
                                     value={formData.twoFirstLineText} onChange={handleChange}/>
-                        <SelectField id="twoFirstLineFontName" label="Font Name" name="twoFirstLineFontName"
-                                     value={formData.twoFirstLineFontName} onChange={handleChange}/>
-                        <InputField id="twoFirstLineFontSize" label="Font Size" name="twoFirstLineFontSize"
-                                    type="number" value={formData.twoFirstLineFontSize} onChange={handleChange}/>
+                        <div className="grid grid-cols-2 gap-4">
+                            <SelectField id="twoFirstLineFontName" label="Font Name" name="twoFirstLineFontName"
+                                         value={formData.twoFirstLineFontName} onChange={handleChange}/>
+                            <InputField id="twoFirstLineFontSize" label="Font Size" name="twoFirstLineFontSize"
+                                        type="number" value={formData.twoFirstLineFontSize} onChange={handleChange}/>
+                        </div>
                     </div>
                     <div>
                         <InputField id="twoSecondLineText" label="Header text" name="twoSecondLineText"
                                     value={formData.twoSecondLineText} onChange={handleChange}/>
-                        <SelectField id="twoSecondLineFontName" label="Font Name" name="twoSecondLineFontName"
-                                     value={formData.twoSecondLineFontName} onChange={handleChange}/>
-                        <InputField id="twoSecondLineFontSize" label="Font Size" name="twoSecondLineFontSize"
-                                    type="number" value={formData.twoSecondLineFontSize} onChange={handleChange}/>
+                        <div className="grid grid-cols-2 gap-4">
+                            <SelectField id="twoSecondLineFontName" label="Font Name" name="twoSecondLineFontName"
+                                         value={formData.twoSecondLineFontName} onChange={handleChange}/>
+                            <InputField id="twoSecondLineFontSize" label="Font Size" name="twoSecondLineFontSize"
+                                        type="number" value={formData.twoSecondLineFontSize} onChange={handleChange}/>
+                        </div>
                     </div>
                     <div>
                         <InputField id="twoParagraphText" label="Header text" name="twoParagraphText"
                                     value={formData.twoParagraphText} onChange={handleChange}/>
-                        <SelectField id="twoParagraphFontName" label="Font Name" name="twoParagraphFontName"
-                                     value={formData.twoParagraphFontName} onChange={handleChange}/>
-                        <InputField id="twoParagraphFontSize" label="Font Size" name="twoParagraphFontSize"
-                                    type="number" value={formData.twoParagraphFontSize} onChange={handleChange}/>
+                        <div className="grid grid-cols-2 gap-4">
+                            <SelectField id="twoParagraphFontName" label="Font Name" name="twoParagraphFontName"
+                                         value={formData.twoParagraphFontName} onChange={handleChange}/>
+                            <InputField id="twoParagraphFontSize" label="Font Size" name="twoParagraphFontSize"
+                                        type="number" value={formData.twoParagraphFontSize} onChange={handleChange}/>
+                        </div>
                     </div>
                     <InputField id="image" label="Image (only if want to change)" name="image" type="file"
                                 onChange={handleChange}/>
@@ -170,31 +182,3 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
         </Dialog>
     );
 }
-
-const InputField = ({id, label, type = "text", ...props}) => (
-    <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-            <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
-            <input id={id} type={type}
-                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" {...props} />
-        </div>
-    </div>
-);
-
-const SelectField = ({id, label, ...props}) => (
-    <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
-            <div className="relative">
-                <select id={id}
-                        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" {...props}>
-                    <option>Choose</option>
-                    <option value="Arial">Arial</option>
-                    <option value="Cambria">Cambria</option>
-                    <option value="Parisienne">Parisienne</option>
-                    <option value="Roboto">Roboto</option>
-                </select>
-            </div>
-        </div>
-    </div>
-);

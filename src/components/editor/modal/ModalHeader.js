@@ -5,6 +5,8 @@ import {
     DialogBody,
     DialogFooter,
 } from "@material-tailwind/react";
+import InputField from "./form/InputField";
+import SelectField from "./form/SelectField";
 
 export default function ModalHeader({ item, triggerOpen, handleClose, handleSave, handleFontChange }) {
     const [open, setOpen] = useState(false);
@@ -92,29 +94,3 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         </Dialog>
     );
 }
-
-const InputField = ({id, label, type = "text", ...props}) => (
-    <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-            <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
-            <input id={id} type={type} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" {...props} />
-        </div>
-    </div>
-);
-
-const SelectField = ({ id, label, ...props }) => (
-    <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor={id}>{label}</label>
-            <div className="relative">
-                <select id={id} className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" {...props}>
-                    <option>Choose</option>
-                    <option value="Arial">Arial</option>
-                    <option value="Cambria">Cambria</option>
-                    <option value="Parisienne">Parisienne</option>
-                    <option value="Roboto">Roboto</option>
-                </select>
-            </div>
-        </div>
-    </div>
-);

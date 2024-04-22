@@ -3,10 +3,10 @@ import React from "react";
 import Modal from "./Modal";
 import Header from "../editor/Header";
 import Slider from "../editor/Slider";
-import ModalHeader from "../editor/modals/ModalHeader";
+import ModalHeader from "../editor/modal/ModalHeader";
 import WebFont from "webfontloader";
 import TwoColumns from "../editor/TwoColumns";
-import ModalTwoColumns from "../editor/modals/ModalTwoColumns";
+import ModalTwoColumns from "../editor/modal/ModalTwoColumns";
 
 export default function Box(props) {
 
