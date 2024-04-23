@@ -65,7 +65,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
 
     return (
         <Dialog open={open} handler={handleClose}>
-            <DialogBody>
+            <DialogBody className="h-[42rem] overflow-scroll">
                 <form onSubmit={handleSubmit} className="w-full">
                     <div>
                         <InputField id="firstLineText" label="Header text" name="firstLineText"

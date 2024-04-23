@@ -56,7 +56,7 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                             }
                         },
                         paragraph: {
-                            text: formData.oneSecondLineText,
+                            text: formData.oneParagraphText,
                             font: {
                                 name: formData.oneParagraphFontName,
                                 size: formData.oneParagraphFontSize
@@ -79,7 +79,7 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                             }
                         },
                         paragraph: {
-                            text: formData.twoSecondLineText,
+                            text: formData.twoParagraphText,
                             font: {
                                 name: formData.twoParagraphFontName,
                                 size: formData.twoParagraphFontSize
@@ -109,10 +109,10 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
 
     return (
         <Dialog open={open} handler={handleClose}>
-            <DialogBody>
-                <form onSubmit={handleSubmit} className="w-full overflow-y-scroll">
+            <DialogBody className="h-[42rem] overflow-scroll">
+                <form onSubmit={handleSubmit} className="w-full">
                     <div>
-                        <InputField id="oneFirstLineText" label="Header text" name="oneFrstLineText"
+                        <InputField id="oneFirstLineText" label="Header text" name="oneFirstLineText"
                                     value={formData.oneFirstLineText} onChange={handleChange}/>
                         <div className="grid grid-cols-2 gap-4">
                             <SelectField id="oneFirstLineFontName" label="Font Name" name="oneFirstLineFontName"
@@ -142,7 +142,7 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                         </div>
                     </div>
                     <div>
-                        <InputField id="twoFirstLineText" label="Header text" name="twoFrstLineText"
+                        <InputField id="twoFirstLineText" label="Header text" name="twoFirstLineText"
                                     value={formData.twoFirstLineText} onChange={handleChange}/>
                         <div className="grid grid-cols-2 gap-4">
                             <SelectField id="twoFirstLineFontName" label="Font Name" name="twoFirstLineFontName"
