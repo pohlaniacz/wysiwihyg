@@ -5,11 +5,13 @@ export default function TwoColumns(props) {
                 <div>
                     {props.item.data.one.firstLine.text && <h1 style={{fontFamily: props.item.data.one.firstLine.font.name, fontSize: `${props.item.data.one.firstLine.font.size}px`}}>{props.item.data.one.firstLine.text}</h1>}
                     {props.item.data.one.secondLine.text && <h2 style={{fontFamily: props.item.data.one.secondLine.font.name, fontSize: `${props.item.data.one.secondLine.font.size}px`}}>{props.item.data.one.secondLine.text}</h2>}
+                    {props.item.data.one.image.src && <img src={props.item.data.one.image.src} alt={props.item.data.one.firstLine.text} />}
                     {props.item.data.one.paragraph.text && <p style={{fontFamily: props.item.data.one.paragraph.font.name, fontSize: `${props.item.data.one.paragraph.font.size}px`}}>{props.item.data.one.paragraph.text}</p>}
                 </div>
                 <div>
                     {props.item.data.two.firstLine.text && <h1 style={{fontFamily: props.item.data.two.firstLine.font.name, fontSize: `${props.item.data.two.firstLine.font.size}px`}}>{props.item.data.two.firstLine.text}</h1>}
                     {props.item.data.two.secondLine.text && <h2 style={{fontFamily: props.item.data.two.secondLine.font.name, fontSize: `${props.item.data.two.secondLine.font.size}px`}}>{props.item.data.two.secondLine.text}</h2>}
+                    {props.item.data.two.image.src && <img src={props.item.data.two.image.src} alt={props.item.data.two.firstLine.text} />}
                     {props.item.data.two.paragraph.text && <p style={{fontFamily: props.item.data.two.paragraph.font.name, fontSize: `${props.item.data.two.paragraph.font.size}px`}}>{props.item.data.two.paragraph.text}</p>}
                 </div>
             </div>

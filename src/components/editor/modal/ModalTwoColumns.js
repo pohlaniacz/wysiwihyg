@@ -20,6 +20,8 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
         oneParagraphText: item.data.one.paragraph.text,
         oneParagraphFontName: item.data.one.paragraph.font.name,
         oneParagraphFontSize: item.data.one.paragraph.font.size,
+        oneImageSrc: item.data.one.image.src,
+        oneImagePosition: item.data.one.image.position,
         twoFirstLineText: item.data.two.firstLine.text,
         twoFirstLineFontName: item.data.two.firstLine.font.name,
         twoFirstLineFontSize: item.data.two.firstLine.font.size,
@@ -29,8 +31,9 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
         twoParagraphText: item.data.two.paragraph.text,
         twoParagraphFontName: item.data.two.paragraph.font.name,
         twoParagraphFontSize: item.data.two.paragraph.font.size,
+        twoImageSrc: item.data.two.image.src,
+        twoImagePosition: item.data.two.image.position,
         parentId: item.id,
-        image: item.data.image,
     });
     useEffect(() => setOpen(triggerOpen), [triggerOpen]);
 
@@ -39,7 +42,6 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
         handleSave(prevBlocks => prevBlocks.map(block =>
             block.id === formData.parentId
                 ? { ...block, data: {
-                    image: formData.image,
                     one: {
                         firstLine: {
                             text: formData.oneFirstLineText,
@@ -61,6 +63,10 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                                 name: formData.oneParagraphFontName,
                                 size: formData.oneParagraphFontSize
                             }
+                        },
+                        image: {
+                            src: formData.oneImageSrc,
+                            position: formData.oneImagePosition
                         }
                     },
                     two: {
@@ -84,6 +90,10 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                                 name: formData.twoParagraphFontName,
                                 size: formData.twoParagraphFontSize
                             }
+                        },
+                        image: {
+                            src: formData.twoImageSrc,
+                            position: formData.twoImagePosition
                         }
                     }
                 } }
@@ -102,7 +112,7 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
-        if (name === "firstLineFontName" || name === "secondLineFontName") {
+        if (name.endsWith("FontName")) {
             handleFontChange(value);
         }
     };
@@ -111,6 +121,7 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
         <Dialog open={open} handler={handleClose}>
             <DialogBody className="h-[42rem] overflow-scroll">
                 <form onSubmit={handleSubmit} className="w-full">
+                    <h2>Left side</h2>
                     <div>
                         <InputField id="oneFirstLineText" label="Header text" name="oneFirstLineText"
                                     value={formData.oneFirstLineText} onChange={handleChange}/>
@@ -141,6 +152,9 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                                         type="number" value={formData.oneParagraphFontSize} onChange={handleChange}/>
                         </div>
                     </div>
+                    <InputField id="oneImageSrc" label="Image (only if want to change)" name="oneImageSrc" type="file"
+                                onChange={handleChange}/>
+                    <h2>Right side</h2>
                     <div>
                         <InputField id="twoFirstLineText" label="Header text" name="twoFirstLineText"
                                     value={formData.twoFirstLineText} onChange={handleChange}/>
@@ -171,7 +185,7 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                                         type="number" value={formData.twoParagraphFontSize} onChange={handleChange}/>
                         </div>
                     </div>
-                    <InputField id="image" label="Image (only if want to change)" name="image" type="file"
+                    <InputField id="twoImageSrc" label="Image (only if want to change)" name="twoImageSrc" type="file"
                                 onChange={handleChange}/>
                 </form>
             </DialogBody>
