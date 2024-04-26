@@ -6,43 +6,43 @@ import {
     DialogFooter,
 } from "@material-tailwind/react";
 import InputField from "./form/InputField";
-import SelectField from "./form/SelectField";
+import FontFields from "./form/FontFields";
+
+const lines = ['firstLine', 'secondLine'];
 
 export default function ModalHeader({ item, triggerOpen, handleClose, handleSave, handleFontChange }) {
     const [open, setOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        firstLineText: item.data.firstLine.text,
-        firstLineFontName: item.data.firstLine.font.name,
-        firstLineFontSize: item.data.firstLine.font.size,
-        secondLineText: item.data.secondLine.text,
-        secondLineFontName: item.data.secondLine.font.name,
-        secondLineTextFontSize: item.data.secondLine.font.size,
-        parentId: item.id,
-        image: item.data.image,
-    });
+    const [formData, setFormData] = useState(
+        lines.reduce((acc, line) => ({
+            ...acc,
+            [`${line}Text`]: item.data[line].text,
+            [`${line}FontName`]: item.data[line].font.name,
+            [`${line}FontSize`]: item.data[line].font.size,
+        }), { parentId: item.id, image: item.data.image })
+    );
+
     useEffect(() => setOpen(triggerOpen), [triggerOpen]);
 
     const handleSubmit = event => {
         event.preventDefault();
         handleSave(prevBlocks => prevBlocks.map(block =>
             block.id === formData.parentId
-                ? { ...block, data: {
-                    image: formData.image,
-                    firstLine: {
-                        text: formData.firstLineText,
-                        font: {
-                            name: formData.firstLineFontName,
-                            size: formData.firstLineFontSize
-                        }
-                    },
-                    secondLine: {
-                        text: formData.secondLineText,
-                        font: {
-                            name: formData.secondLineFontName,
-                            size: formData.secondLineTextFontSize
-                        }
-                    },
-                } }
+                ? {
+                    ...block,
+                    data: {
+                        image: formData.image,
+                        ...lines.reduce((acc, line) => ({
+                            ...acc,
+                            [line]: {
+                                text: formData[`${line}Text`],
+                                font: {
+                                    name: formData[`${line}FontName`],
+                                    size: formData[`${line}FontSize`]
+                                }
+                            },
+                        }), {})
+                    }
+                }
                 : block
         ));
         handleClose();
@@ -58,7 +58,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
-        if (name === "firstLineFontName" || name === "secondLineFontName") {
+        if (name.endsWith("FontName")) {
             handleFontChange(value);
         }
     };
@@ -67,22 +67,9 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         <Dialog open={open} handler={handleClose}>
             <DialogBody className="h-[42rem] overflow-scroll">
                 <form onSubmit={handleSubmit} className="w-full">
-                    <div>
-                        <InputField id="firstLineText" label="Header text" name="firstLineText"
-                                    value={formData.firstLineText} onChange={handleChange}/>
-                        <SelectField id="firstLineFontName" label="Font Name" name="firstLineFontName"
-                                     value={formData.firstLineFontName} onChange={handleChange}/>
-                        <InputField id="firstLineFontSize" label="Font Size" name="firstLineFontSize"
-                                    type="number" value={formData.firstLineFontSize} onChange={handleChange}/>
-                    </div>
-                    <div>
-                        <InputField id="secondLineText" label="Header text" name="secondLineText"
-                                    value={formData.secondLineText} onChange={handleChange}/>
-                        <SelectField id="secondLineFontName" label="Font Name" name="secondLineFontName"
-                                     value={formData.secondLineFontName} onChange={handleChange}/>
-                        <InputField id="secondLineTextFontSize" label="Font Size" name="secondLineTextFontSize"
-                                    type="number" value={formData.secondLineTextFontSize} onChange={handleChange}/>
-                    </div>
+                    {lines.map(line => (
+                        <FontFields prefix={line} formData={formData} handleChange={handleChange} />
+                    ))}
                     <InputField id="image" label="Image (only if want to change)" name="image" type="file"
                                 onChange={handleChange}/>
                 </form>
