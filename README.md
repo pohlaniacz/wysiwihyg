@@ -14,9 +14,8 @@ npm start
 https://wysiwihyg.netlify.app
 
 ### Todo
-- [ ] Two columns component, with two headers, pictures and paragraph
-  - [ ] Fix modal savings
-- [ ] Make component (?) for font stuff
+- [ ] Block with counting
+- [ ] Better demo/placeholders
 - [ ] Return saved form to data (like `data.js`)
 
 ### Done ✓
@@ -30,3 +29,7 @@ https://wysiwihyg.netlify.app
   - [x] Edit text
   - [x] Font select for header
   - [x] Image upload as a background
+- [x] Two columns component, with two headers, pictures and paragraph
+  - [x] Fix modal savings
+- [x] Make component (?) for font stuff
+- [x] Allow multiline text

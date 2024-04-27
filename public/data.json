@@ -5,6 +5,7 @@
     "data": {
       "firstLine": {
         "text": "First line",
+        "type": "multiLine",
         "font": {
           "name": "Parisienne",
           "size": 60
@@ -12,6 +13,7 @@
       },
       "secondLine": {
         "text": "second line",
+        "type": "singleLine",
         "font": {
           "name": "Parisienne",
           "size": 40
@@ -28,6 +30,7 @@
       "one": {
         "firstLine": {
           "text": "First line",
+          "type": "singleLine",
           "font": {
             "name": "Parisienne",
             "size": 60
@@ -35,6 +38,7 @@
         },
         "secondLine": {
           "text": "second line",
+          "type": "singleLine",
           "font": {
             "name": "Parisienne",
             "size": 40
@@ -42,6 +46,7 @@
         },
         "paragraph": {
           "text": "Lorem ipsum",
+          "type": "singleLine",
           "font": {
             "name": "Parisienne",
             "size": 40
@@ -55,6 +60,7 @@
       "two": {
         "firstLine": {
           "text": "First line",
+          "type": "singleLine",
           "font": {
             "name": "Parisienne",
             "size": 60
@@ -62,6 +68,7 @@
         },
         "secondLine": {
           "text": "second line",
+          "type": "singleLine",
           "font": {
             "name": "Parisienne",
             "size": 40
@@ -69,6 +76,7 @@
         },
         "paragraph": {
           "text": "Lorem ipsum",
+          "type": "singleLine",
           "font": {
             "name": "Parisienne",
             "size": 40
@@ -88,6 +96,7 @@
       "countTo": "2024-09-01 18:00:00",
       "firstLine": {
         "text": "First line",
+        "type": "singleLine",
         "font": {
           "name": "Parisienne",
           "size": 60
@@ -95,6 +104,7 @@
       },
       "secondLine": {
         "text": "second line",
+        "type": "singleLine",
         "font": {
           "name": "Parisienne",
           "size": 40
@@ -102,6 +112,7 @@
       },
       "paragraph": {
         "text": "Lorem ipsum",
+        "type": "multiLine",
         "font": {
           "name": "Parisienne",
           "size": 40
@@ -136,6 +147,7 @@
     "data": {
       "firstLine": {
         "text": "First line",
+        "type": "singleLine",
         "font": {
           "name": "Parisienne",
           "size": 60
@@ -143,6 +155,7 @@
       },
       "secondLine": {
         "text": "second line",
+        "type": "singleLine",
         "font": {
           "name": "Parisienne",
           "size": 40

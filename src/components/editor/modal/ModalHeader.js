@@ -16,6 +16,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         lines.reduce((acc, line) => ({
             ...acc,
             [`${line}Text`]: item.data[line].text,
+            [`${line}Type`]: item.data[line].type,
             [`${line}FontName`]: item.data[line].font.name,
             [`${line}FontSize`]: item.data[line].font.size,
         }), { parentId: item.id, image: item.data.image })
