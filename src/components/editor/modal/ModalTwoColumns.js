@@ -18,7 +18,6 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
             ...acc,
             ...lines.reduce((acc2, line) => ({
                 ...acc2,
-                [`${section}${line}Type`]: item.data[section][line].type,
                 [`${section}${line}Text`]: item.data[section][line].text,
                 [`${section}${line}FontName`]: item.data[section][line].font.name,
                 [`${section}${line}FontSize`]: item.data[section][line].font.size,
@@ -80,20 +79,15 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
         <Dialog open={open} handler={handleClose}>
             <DialogBody className="h-[42rem] overflow-scroll">
                 <form onSubmit={handleSubmit} className="w-full">
-                    {sections.map(section => (
-                        <>
-                            {sections.map(section => (
-                                <>
-                                    <h2>{section.charAt(0).toUpperCase() + section.slice(1)} side</h2>
-                                    {lines.map(line => (
-                                        <FontFields prefix={`${section}${line}`} formData={formData} handleChange={handleChange} />
-                                    ))}
-                                    <InputField id={`${section}ImageSrc`} label="Image (only if want to change)" name={`${section}ImageSrc`} type="file"
-                                                onChange={handleChange}/>
-                                </>
+                    {sections.map((section, index) => (
+                        <div key={index}>
+                            <h2>{section.charAt(0).toUpperCase() + section.slice(1)} side</h2>
+                            {lines.map((line, lineIndex) => (
+                                <FontFields key={lineIndex} prefix={`${section}${line}`} formData={formData} handleChange={handleChange} component={item.type} />
                             ))}
-
-                        </>
+                            <InputField id={`${section}ImageSrc`} label="Image (only if want to change)" name={`${section}ImageSrc`} type="file"
+                                        onChange={handleChange}/>
+                        </div>
                     ))}
                 </form>
             </DialogBody>

@@ -3,8 +3,8 @@ import InputField from "./InputField";
 import SelectField from "./SelectField";
 import TextAreaField from "./TextAreaField";
 
-export default function FontFields({ prefix, formData, handleChange }) {
-    const TextFieldComponent = formData[`${prefix}Type`] === 'multiLine' ? TextAreaField : InputField;
+export default function FontFields({ prefix, formData, handleChange, component }) {
+    const TextFieldComponent = component === 'header' ? TextAreaField : InputField;
 
     return (
         <div>

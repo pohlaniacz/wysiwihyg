@@ -16,7 +16,6 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         lines.reduce((acc, line) => ({
             ...acc,
             [`${line}Text`]: item.data[line].text,
-            [`${line}Type`]: item.data[line].type,
             [`${line}FontName`]: item.data[line].font.name,
             [`${line}FontSize`]: item.data[line].font.size,
         }), { parentId: item.id, image: item.data.image })
@@ -68,8 +67,8 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
         <Dialog open={open} handler={handleClose}>
             <DialogBody className="h-[42rem] overflow-scroll">
                 <form onSubmit={handleSubmit} className="w-full">
-                    {lines.map(line => (
-                        <FontFields prefix={line} formData={formData} handleChange={handleChange} />
+                    {lines.map((line, lineIndex) => (
+                        <FontFields key={lineIndex} prefix={line} formData={formData} handleChange={handleChange} component={item.type} />
                     ))}
                     <InputField id="image" label="Image (only if want to change)" name="image" type="file"
                                 onChange={handleChange}/>

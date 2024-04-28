@@ -16,7 +16,10 @@ https://wysiwihyg.netlify.app
 ### Todo
 - [ ] Block with counting
 - [ ] Better demo/placeholders
-- [ ] Return saved form to data (like `data.js`)
+- [ ] Return saved form to firestore
+- [ ] Welcome modal
+- [ ] Translations
+- [ ] Tests
 
 ### Done ✓
 
