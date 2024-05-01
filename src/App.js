@@ -1,19 +1,66 @@
 import './styles/App.scss';
 import React from "react";
 import Box from "./components/layout/Box";
+import { db } from './components/external/firebase';
+import { v4 as uuidv4 } from 'uuid';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 export default function App() {
 
     const [data, setData] = React.useState(null);
     const [blocks, setBlocks] = React.useState(null);
 
+    const writeData = async (userId, userData) => {
+        try {
+            if (Array.isArray(userData)) {
+                await setDoc(doc(db, "blocks", userId), { items: userData });
+            } else {
+                await setDoc(doc(db, "blocks", userId), userData);
+            }
+            console.log("Document successfully written!");
+        } catch (error) {
+            console.error("Error writing document: ", error);
+        }
+    }
+
+    const loadData = async (userId) => {
+        try {
+            const response = await fetch(process.env.PUBLIC_URL + '/data.json');
+            const data = await response.json();
+            setData(data);
+            setBlocks(data);
+
+            // Save data to Firestore
+            await writeData(userId, data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     React.useEffect(() => {
-        fetch(process.env.PUBLIC_URL + '/data.json')
-            .then(response => response.json())
-            .then(data => {
-                setData(data);
-                setBlocks(data);
-            });
+        const fetchData = async () => {
+            let userId = sessionStorage.getItem('userId');
+            if (!userId) {
+                userId = uuidv4();
+                sessionStorage.setItem('userId', userId);
+
+                // Load data from data.json
+                await loadData(userId);
+            } else {
+                const docRef = doc(db, 'blocks', userId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data().items;
+                    setData(data);
+                    setBlocks(data);
+                } else {
+                    await loadData(userId);
+                }
+            }
+        };
+
+        fetchData();
     }, []);
 
     if (!data) return "Loading...";
