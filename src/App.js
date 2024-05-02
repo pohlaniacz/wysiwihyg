@@ -12,16 +12,21 @@ export default function App() {
 
     const writeData = async (userId, userData) => {
         try {
-            if (Array.isArray(userData)) {
-                await setDoc(doc(db, "blocks", userId), { items: userData });
+            const checkedData = JSON.parse(JSON.stringify(userData, (key, value) =>
+                value === undefined ? null : value
+            ));
+
+            if (Array.isArray(checkedData)) {
+                await setDoc(doc(db, "blocks", userId), { items: checkedData });
             } else {
-                await setDoc(doc(db, "blocks", userId), userData);
+                await setDoc(doc(db, "blocks", userId), checkedData);
             }
             console.log("Document successfully written!");
         } catch (error) {
             console.error("Error writing document: ", error);
         }
     }
+
 
     const loadData = async (userId) => {
         try {
@@ -105,6 +110,7 @@ export default function App() {
                     handleMoveBlock={moveBlock}
                     handleSave={setBlocks}
                     blocks={blocks}
+                    handleWriteData={writeData}
                 />
             })}
         </div>

@@ -10,7 +10,7 @@ import FontFields from "./form/FontFields";
 
 const lines = ['firstLine', 'secondLine'];
 
-export default function ModalHeader({ item, triggerOpen, handleClose, handleSave, handleFontChange }) {
+export default function ModalHeader({ item, triggerOpen, handleClose, handleSave, handleFontChange, handleWriteData }) {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(
         lines.reduce((acc, line) => ({
@@ -25,28 +25,37 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleSave
 
     const handleSubmit = event => {
         event.preventDefault();
-        handleSave(prevBlocks => prevBlocks.map(block =>
-            block.id === formData.parentId
-                ? {
-                    ...block,
-                    data: {
-                        image: formData.image,
-                        ...lines.reduce((acc, line) => ({
-                            ...acc,
-                            [line]: {
-                                text: formData[`${line}Text`],
-                                font: {
-                                    name: formData[`${line}FontName`],
-                                    size: formData[`${line}FontSize`]
-                                }
-                            },
-                        }), {})
+        handleSave(prevBlocks => {
+            const newData = prevBlocks.map(block =>
+                block.id === formData.parentId
+                    ? {
+                        ...block,
+                        data: {
+                            image: formData.image,
+                            ...lines.reduce((acc, line) => ({
+                                ...acc,
+                                [line]: {
+                                    text: formData[`${line}Text`],
+                                    font: {
+                                        name: formData[`${line}FontName`],
+                                        size: formData[`${line}FontSize`]
+                                    }
+                                },
+                            }), {})
+                        }
                     }
-                }
-                : block
-        ));
+                    : block
+            );
+
+            const userId = sessionStorage.getItem('userId');
+
+            handleWriteData(userId, newData);
+
+            return newData;
+        });
         handleClose();
     };
+
 
     const handleChange = ({ target: { name, value, files } }) => {
         if (files) {

@@ -11,7 +11,7 @@ import FontFields from "./form/FontFields";
 const sections = ['one', 'two'];
 const lines = ['firstLine', 'secondLine', 'paragraph'];
 
-export default function ModalTwoColumns({ item, triggerOpen, handleClose, handleSave, handleFontChange }) {
+export default function ModalTwoColumns({ item, triggerOpen, handleClose, handleSave, handleFontChange, handleWriteData }) {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(
         sections.reduce((acc, section) => ({
@@ -31,34 +31,43 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
 
     const handleSubmit = event => {
         event.preventDefault();
-        handleSave(prevBlocks => prevBlocks.map(block =>
-            block.id === formData.parentId
-                ? {
-                    ...block,
-                    data: sections.reduce((acc, section) => ({
-                        ...acc,
-                        [section]: {
-                            ...lines.reduce((acc2, line) => ({
-                                ...acc2,
-                                [line]: {
-                                    text: formData[`${section}${line}Text`],
-                                    font: {
-                                        name: formData[`${section}${line}FontName`],
-                                        size: formData[`${section}${line}FontSize`]
-                                    }
-                                },
-                            }), {}),
-                            image: {
-                                src: formData[`${section}ImageSrc`],
-                                position: formData[`${section}ImagePosition`]
+        handleSave(prevBlocks => {
+            const newData = prevBlocks.map(block =>
+                block.id === formData.parentId
+                    ? {
+                        ...block,
+                        data: sections.reduce((acc, section) => ({
+                            ...acc,
+                            [section]: {
+                                ...lines.reduce((acc2, line) => ({
+                                    ...acc2,
+                                    [line]: {
+                                        text: formData[`${section}${line}Text`],
+                                        font: {
+                                            name: formData[`${section}${line}FontName`],
+                                            size: formData[`${section}${line}FontSize`]
+                                        }
+                                    },
+                                }), {}),
+                                image: {
+                                    src: formData[`${section}ImageSrc`],
+                                    position: formData[`${section}ImagePosition`]
+                                }
                             }
-                        }
-                    }), {})
-                }
-                : block
-        ));
+                        }), {})
+                    }
+                    : block
+            );
+
+            const userId = sessionStorage.getItem('userId');
+
+            handleWriteData(userId, newData);
+
+            return newData;
+        });
         handleClose();
     };
+
 
     const handleChange = ({ target: { name, value, files } }) => {
         if (files) {

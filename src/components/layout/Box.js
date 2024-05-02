@@ -41,6 +41,7 @@ export default function Box(props) {
                         handleClose={handleClose}
                         item={props.item}
                         handleFontChange={handleFontChange}
+                        handleWriteData={props.handleWriteData}
                     />
                 </Header>
             )}
@@ -60,6 +61,7 @@ export default function Box(props) {
                         handleClose={handleClose}
                         item={props.item}
                         handleFontChange={handleFontChange}
+                        handleWriteData={props.handleWriteData}
                     />
                 </TwoColumns>
             )}
