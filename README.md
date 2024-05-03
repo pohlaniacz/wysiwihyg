@@ -3,11 +3,19 @@ What You See Is What I Hope You Get is a project that will contain react compone
 Todo will be grown as project continues.
 
 ### How to start
-Just (for now):
-
 ```
+## Project
 npm install
 npm start
+
+## Locally (firestore emulators)
+curl -sL https://firebase.tools | bash
+# If Java missing
+sudo apt install default-jre
+firebase emulators:start --only firestore
+
+## Production
+# Provide credentials for Firestore base on .env.dist and save as .env
 ```
 
 ### Demo [![Netlify Status](https://api.netlify.com/api/v1/badges/9894d085-fc24-496f-bda5-8f3d1c315cb8/deploy-status)](https://app.netlify.com/sites/wysiwihyg/deploys)
