@@ -28,21 +28,21 @@ export default function App() {
     }
 
 
-    const loadData = async (userId) => {
-        try {
-            const response = await fetch(process.env.PUBLIC_URL + '/data.json');
-            const data = await response.json();
-            setData(data);
-            setBlocks(data);
-
-            // Save data to Firestore
-            await writeData(userId, data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     React.useEffect(() => {
+        const loadData = async (userId) => {
+            try {
+                const response = await fetch(process.env.PUBLIC_URL + '/data.json');
+                const data = await response.json();
+                setData(data);
+                setBlocks(data);
+
+                await writeData(userId, data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
         const fetchData = async () => {
             let userId = sessionStorage.getItem('userId');
             if (!userId) {
