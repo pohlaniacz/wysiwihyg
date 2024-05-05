@@ -4,18 +4,21 @@ Todo will be grown as project continues.
 
 ### How to start
 ```
-## Project
+### Project
 npm install
 npm start
 
-## Locally (firestore emulators)
+### Locally (firestore emulators)
 curl -sL https://firebase.tools | bash
-# If Java missing
+### If Java missing
+## Ubuntu
 sudo apt install default-jre
+## MacOs
+# Download and run https://www.oracle.com/java/technologies/downloads/#jdk22-mac [ARM64 DMG Installer]
 firebase emulators:start --only firestore
 
-## Production
-# Provide credentials for Firestore base on .env.dist and save as .env
+### Production
+# Provide credentials for Firestore based on .env.dist and save as .env
 ```
 
 ### Demo [![Netlify Status](https://api.netlify.com/api/v1/badges/9894d085-fc24-496f-bda5-8f3d1c315cb8/deploy-status)](https://app.netlify.com/sites/wysiwihyg/deploys)
