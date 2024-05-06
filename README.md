@@ -27,7 +27,7 @@ https://wysiwihyg.netlify.app
 ### Todo
 - [ ] Block with counting
 - [ ] Better demo/placeholders
-- [ ] Return saved form to firestore
+- [ ] Return saved form to firestore (bug?)
 - [ ] Welcome modal
 - [ ] Translations
 - [ ] Tests
@@ -47,3 +47,4 @@ https://wysiwihyg.netlify.app
   - [x] Fix modal savings
 - [x] Make component (?) for font stuff
 - [x] Allow multiline text
+- [x] Firestore + local firestore
