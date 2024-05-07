@@ -27,8 +27,6 @@ export default function App() {
         }
     }
 
-
-
     React.useEffect(() => {
         const loadData = async (userId) => {
             try {
@@ -44,10 +42,10 @@ export default function App() {
         };
 
         const fetchData = async () => {
-            let userId = sessionStorage.getItem('userId');
+            let userId = localStorage.getItem('userId');
             if (!userId) {
                 userId = uuidv4();
-                sessionStorage.setItem('userId', userId);
+                localStorage.setItem('userId', userId);
 
                 // Load data from data.json
                 await loadData(userId);
