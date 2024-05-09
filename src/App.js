@@ -111,6 +111,16 @@ export default function App() {
                     handleWriteData={writeData}
                 />
             })}
+            <div className="fixed right-4 bottom-4">
+                <button
+                    className="bg-blue-500 text-white w-12 h-12 rounded-full hover:bg-blue-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none flex items-center justify-center">
+                    <svg viewBox="0 0 20 20" fill="currentColor" className="plus w-6 h-6">
+                        <path fill-rule="evenodd"
+                              d="M10 2a1 1 0 011 1v6h6a1 1 0 110 2h-6v6a1 1 0 11-2 0v-6H4a1 1 0 110-2h6V3a1 1 0 011-1z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     );
 }
