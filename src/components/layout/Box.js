@@ -7,10 +7,12 @@ import ModalHeader from "../editor/modal/ModalHeader";
 import WebFont from "webfontloader";
 import TwoColumns from "../editor/TwoColumns";
 import ModalTwoColumns from "../editor/modal/ModalTwoColumns";
+import Add from "../editor/modal/Add";
 
 export default function Box(props) {
 
     const [openModalId, setOpenModalId] = React.useState(0);
+    const [isAddOpen, setIsAddOpen] = React.useState(false);
 
     const handleFontChange = (newFont) => {
         WebFont.load({
@@ -65,6 +67,10 @@ export default function Box(props) {
                     />
                 </TwoColumns>
             )}
+            <Add
+                triggerOpen={isAddOpen}
+                handleClose={() => setIsAddOpen(false)}
+            />
         </>
     );
 }

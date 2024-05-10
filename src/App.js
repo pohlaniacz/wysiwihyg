@@ -113,6 +113,7 @@ export default function App() {
             })}
             <div className="fixed right-4 bottom-4">
                 <button
+                    // onClick={() => setIsAddOpen(true)}
                     className="bg-blue-500 text-white w-12 h-12 rounded-full hover:bg-blue-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none flex items-center justify-center">
                     <svg viewBox="0 0 20 20" fill="currentColor" className="plus w-6 h-6">
                         <path fill-rule="evenodd"
