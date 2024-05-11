@@ -26,6 +26,7 @@ https://wysiwihyg.netlify.app
 
 ### Todo
 - [ ] Modal with choose and add block type
+- [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
 - [ ] Better demo/placeholders
 - [ ] Return saved form to firestore (bug?)
