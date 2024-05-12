@@ -12,7 +12,6 @@ import Add from "../editor/modal/Add";
 export default function Box(props) {
 
     const [openModalId, setOpenModalId] = React.useState(0);
-    const [isAddOpen, setIsAddOpen] = React.useState(false);
 
     const handleFontChange = (newFont) => {
         WebFont.load({
@@ -24,7 +23,7 @@ export default function Box(props) {
 
     function handleEdit(e) {
         e.stopPropagation();
-        setOpenModalId(Number(e.target.closest('section').getAttribute('data-id')));
+        setOpenModalId(Number(e.target.closest('button').getAttribute('data-parent')));
     }
 
     function handleClose() {
@@ -35,7 +34,7 @@ export default function Box(props) {
         <>
             {props.item.type === "header" && (
                 <Header key={props.item.id} item={props.item}>
-                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <EditBox parent={props.item.id} handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
                     <ModalHeader
                         handleSave={props.handleSave}
                         blocks={props.blocks}
@@ -49,13 +48,13 @@ export default function Box(props) {
             )}
             {props.item.type === "slider" && (
                 <Slider key={props.item.id} item={props.item}>
-                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <EditBox parent={props.item.id} handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
                     <Modal type={props.item.type} triggerOpen={props.item.id === openModalId} handleClose={handleClose} content={props.item.id}/>
                 </Slider>
             )}
             {props.item.type === "two-columns" && (
                 <TwoColumns key={props.item.id} item={props.item}>
-                    <EditBox handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <EditBox parent={props.item.id} handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
                     <ModalTwoColumns
                         handleSave={props.handleSave}
                         blocks={props.blocks}
@@ -67,9 +66,10 @@ export default function Box(props) {
                     />
                 </TwoColumns>
             )}
+
             <Add
-                triggerOpen={isAddOpen}
-                handleClose={() => setIsAddOpen(false)}
+                triggerOpen={123 === openModalId}
+                handleClose={handleClose}
             />
         </>
     );

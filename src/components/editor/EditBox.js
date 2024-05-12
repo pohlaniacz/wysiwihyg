@@ -4,6 +4,7 @@ export default function EditBox(props) {
     return (
         <ButtonGroup className="App-editBox" color="amber">
             <Button
+                data-parent={props.parent}
                 data-action="up"
                 title="up"
                 onClick={props.handleMoveBlock}
@@ -11,6 +12,7 @@ export default function EditBox(props) {
                 up ↑
             </Button>
             <Button
+                data-parent={props.parent}
                 data-action="down"
                 title="down"
                 onClick={props.handleMoveBlock}
@@ -18,6 +20,7 @@ export default function EditBox(props) {
                 down ↓
             </Button>
             <Button
+                data-parent={props.parent}
                 data-action="edit"
                 title="edit"
                 onClick={props.handleEdit}
@@ -25,10 +28,12 @@ export default function EditBox(props) {
                 edit ✎
             </Button>
             <Button
-                data-action="duplicate"
-                title="duplicate"
+                data-parent="123"
+                data-action="add"
+                title="add"
+                onClick={props.handleEdit}
             >
-                clone ⎘
+                add +
             </Button>
         </ButtonGroup>
     )
