@@ -70,6 +70,8 @@ export default function Box(props) {
             <Add
                 triggerOpen={123 === openModalId}
                 handleClose={handleClose}
+                handleWriteData={props.handleWriteData}
+                handleSave={props.handleSave}
             />
         </>
     );
