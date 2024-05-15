@@ -29,7 +29,7 @@ https://wysiwihyg.netlify.app
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
 - [ ] Better demo/placeholders
-- [ ] Return saved form to firestore (bug?)
+- [ ] Return saved form to firestore
 - [ ] Welcome modal
 - [ ] Translations
 - [ ] Tests
