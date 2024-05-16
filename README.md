@@ -31,6 +31,8 @@ https://wysiwihyg.netlify.app
 - [ ] Better demo/placeholders
 - [ ] Return saved form to firestore
 - [ ] Welcome modal
+- [ ] Move add button outside top menu
+- [ ] Replace modal component with own component
 - [ ] Translations
 - [ ] Tests
 
