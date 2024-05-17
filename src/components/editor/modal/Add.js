@@ -1,7 +1,8 @@
 import {Button, Dialog, DialogBody, DialogFooter} from "@material-tailwind/react";
 import React, {useEffect, useState} from "react";
+import {header} from "../../defaults";
 
-export default function Add ({ item, triggerOpen, handleClose, handleWriteData, handleSave }) {
+export default function Add ({ parentId, triggerOpen, handleClose, handleWriteData, handleSave }) {
     const [open, setOpen] = useState(false);
 
     useEffect(() => setOpen(triggerOpen), [triggerOpen]);
@@ -11,7 +12,11 @@ export default function Add ({ item, triggerOpen, handleClose, handleWriteData, 
         handleSave(prevBlocks => {
             const newData = prevBlocks;
 
-            // todo
+            let index = newData.findIndex(obj => obj.id === parentId);
+
+            if (index !== -1) {
+                newData.splice(index + 1, 0, header);
+            }
 
             const userId = localStorage.getItem('userId');
 

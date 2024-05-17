@@ -1,4 +1,4 @@
-let header = {
+export let header = {
     "id": 1,
     "type": "header",
     "data": {
@@ -22,7 +22,7 @@ let header = {
 };
 
 
-let twoColumns = {
+export let twoColumns = {
     "id": 33,
     "type": "two-columns",
     "data": {

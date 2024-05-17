@@ -25,6 +25,7 @@ firebase emulators:start --only firestore
 https://wysiwihyg.netlify.app
 
 ### Todo
+- [ ] Use useContext()
 - [ ] Modal with choose and add block type
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
