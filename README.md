@@ -26,7 +26,8 @@ https://wysiwihyg.netlify.app
 
 ### Todo
 - [ ] Use useContext()
-- [ ] Modal with choose and add block type
+- [x] Modal with choose and add block type
+  - [ ] Fix
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
 - [ ] Better demo/placeholders
