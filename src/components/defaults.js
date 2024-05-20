@@ -1,5 +1,5 @@
 export let header = {
-    "id": 1,
+    "id": "",
     "type": "header",
     "data": {
         "firstLine": {
@@ -23,7 +23,7 @@ export let header = {
 
 
 export let twoColumns = {
-    "id": 33,
+    "id": "",
     "type": "two-columns",
     "data": {
         "one": {

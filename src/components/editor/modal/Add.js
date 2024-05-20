@@ -1,11 +1,19 @@
 import {Button, Dialog, DialogBody, DialogFooter} from "@material-tailwind/react";
 import React, {useEffect, useState} from "react";
-import {header} from "../../defaults";
+import {header, twoColumns} from "../../defaults";
 
 export default function Add ({ parentId, triggerOpen, handleClose, handleWriteData, handleSave }) {
     const [open, setOpen] = useState(false);
 
     useEffect(() => setOpen(triggerOpen), [triggerOpen]);
+
+    const [formData, setFormData] = useState({
+        blockType: ''
+    });
+
+    const handleChange = ({ target: { name, value } }) => {
+        setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
+    };
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -14,8 +22,11 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
 
             let index = newData.findIndex(obj => obj.id === parentId);
 
+            // todo, put random id to block
+            // todo, prevent not checking anything
+
             if (index !== -1) {
-                newData.splice(index + 1, 0, header);
+                newData.splice(index + 1, 0, formData.blockType === "header" ? header : twoColumns); // future todo
             }
 
             const userId = localStorage.getItem('userId');
@@ -34,8 +45,11 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
                 <h3 className="mb-5 text-lg font-medium text-gray-900 dark:text-white">Choose block type:</h3>
                 <ul className="grid w-full gap-6 md:grid-cols-2">
                     <li>
-                        <input type="radio" id="blockType-header" name="blockType" value="blockType-header"
-                               className="hidden peer" required/>
+                        <input type="radio" id="blockType-header" name="blockType" value="header"
+                               className="hidden peer"
+                               onChange={handleChange}
+                               checked={formData.blockType === "header"}
+                        />
                         <label htmlFor="blockType-header"
                                className="inline-flex items-center justify-between w-full p-5 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <div className="block">
@@ -51,8 +65,11 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
                         </label>
                     </li>
                     <li>
-                        <input type="radio" id="blockType-twoColumns" name="blockType" value="blockType-twoColumns"
-                               className="hidden peer"/>
+                        <input type="radio" id="blockType-twoColumns" name="blockType" value="twoColumns"
+                               className="hidden peer"
+                               onChange={handleChange}
+                               checked={formData.blockType === "twoColumns"}
+                       />
                         <label htmlFor="blockType-twoColumns"
                                className="inline-flex items-center justify-between w-full p-5 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <div className="block">
