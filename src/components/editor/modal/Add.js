@@ -1,9 +1,11 @@
 import {Button, Dialog, DialogBody, DialogFooter} from "@material-tailwind/react";
 import React, {useEffect, useState} from "react";
 import {header, twoColumns} from "../../defaults";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Add ({ parentId, triggerOpen, handleClose, handleWriteData, handleSave }) {
     const [open, setOpen] = useState(false);
+    const [changed, setChanged] = useState(false);
 
     useEffect(() => setOpen(triggerOpen), [triggerOpen]);
 
@@ -13,6 +15,7 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
 
     const handleChange = ({ target: { name, value } }) => {
         setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
+        setChanged(true);
     };
 
     const handleSubmit = event => {
@@ -21,12 +24,11 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
             const newData = prevBlocks;
 
             let index = newData.findIndex(obj => obj.id === parentId);
-
-            // todo, put random id to block
-            // todo, prevent not checking anything
+            let newBlock = formData.blockType === "header" ? header : twoColumns; // future todo
+            newBlock.id = uuidv4();
 
             if (index !== -1) {
-                newData.splice(index + 1, 0, formData.blockType === "header" ? header : twoColumns); // future todo
+                newData.splice(index + 1, 0, newBlock);
             }
 
             const userId = localStorage.getItem('userId');
@@ -89,7 +91,7 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
             </DialogBody>
             <DialogFooter>
                 <Button variant="text" color="red" onClick={handleClose} className="mr-1">Cancel</Button>
-                <Button variant="gradient" color="green" onClick={handleSubmit}>Add</Button>
+                <Button variant="gradient" color="green" onClick={handleSubmit} disabled={!changed}>Add</Button>
             </DialogFooter>
         </Dialog>
     );
