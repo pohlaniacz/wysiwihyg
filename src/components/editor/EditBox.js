@@ -1,6 +1,13 @@
 import {Button, ButtonGroup} from "@material-tailwind/react";
 
 export default function EditBox(props) {
+
+    const remove = event => {
+        event.preventDefault();
+        console.log(event.target.closest('section').getAttribute('data-id'));
+
+    };
+
     return (
         <ButtonGroup className="App-editBox" color="amber">
             <Button
@@ -34,6 +41,14 @@ export default function EditBox(props) {
                 onClick={props.handleEdit}
             >
                 add +
+            </Button>
+            <Button
+                data-parent="456"
+                data-action="remove"
+                title="remove"
+                onClick={remove}
+            >
+                remove -
             </Button>
         </ButtonGroup>
     )

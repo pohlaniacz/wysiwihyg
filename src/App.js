@@ -21,6 +21,7 @@ export default function App() {
             } else {
                 await setDoc(doc(db, "blocks", userId), checkedData);
             }
+            setBlocks(checkedData);
             console.log("Document successfully written!");
         } catch (error) {
             console.error("Error writing document: ", error);

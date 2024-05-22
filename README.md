@@ -25,9 +25,8 @@ firebase emulators:start --only firestore
 https://wysiwihyg.netlify.app
 
 ### Todo
+- [ ] Remove block
 - [ ] Use useContext()
-- [x] Modal with choose and add block type
-  - [ ] Fix, probably id is not necessary
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
 - [ ] Better demo/placeholders
@@ -54,3 +53,5 @@ https://wysiwihyg.netlify.app
 - [x] Make component (?) for font stuff
 - [x] Allow multiline text
 - [x] Firestore + local firestore
+- [x] Modal with choose and add block type
+  - [x] Fix, probably id is not necessary
