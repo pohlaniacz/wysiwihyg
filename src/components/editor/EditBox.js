@@ -2,10 +2,24 @@ import {Button, ButtonGroup} from "@material-tailwind/react";
 
 export default function EditBox(props) {
 
-    const remove = event => {
+    const remove = event => { // todo, remove old data from data.json?
         event.preventDefault();
-        console.log(event.target.closest('section').getAttribute('data-id'));
+        const idToRemove = event.target.closest('section').getAttribute('data-id');
 
+        // Copy the blocks array
+        const newData = [...props.blocks];
+
+        // Find the index of the object with the given id
+        let index = newData.findIndex(obj => obj.id === idToRemove);
+
+        // If the object is found, remove it from the array
+        if (index !== -1) {
+            newData.splice(index, 1);
+        }
+
+        // Write the updated data
+        const userId = localStorage.getItem('userId');
+        props.handleWriteData(userId, newData);
     };
 
     return (

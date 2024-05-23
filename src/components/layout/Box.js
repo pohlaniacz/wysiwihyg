@@ -34,9 +34,14 @@ export default function Box(props) {
         <>
             {props.item.type === "header" && (
                 <Header key={props.item.id} item={props.item}>
-                    <EditBox parent={props.item.id} handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <EditBox
+                        parent={props.item.id}
+                        handleEdit={handleEdit}
+                        handleMoveBlock={props.handleMoveBlock}
+                        blocks={props.blocks}
+                        handleWriteData={props.handleWriteData}
+                    />
                     <ModalHeader
-                        handleSave={props.handleSave}
                         blocks={props.blocks}
                         triggerOpen={props.item.id === openModalId}
                         handleClose={handleClose}
@@ -48,15 +53,26 @@ export default function Box(props) {
             )}
             {props.item.type === "slider" && (
                 <Slider key={props.item.id} item={props.item}>
-                    <EditBox parent={props.item.id} handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <EditBox
+                        parent={props.item.id}
+                        handleEdit={handleEdit}
+                        handleMoveBlock={props.handleMoveBlock}
+                        blocks={props.blocks}
+                        handleWriteData={props.handleWriteData}
+                    />
                     <Modal type={props.item.type} triggerOpen={props.item.id === openModalId} handleClose={handleClose} content={props.item.id}/>
                 </Slider>
             )}
             {props.item.type === "two-columns" && (
                 <TwoColumns key={props.item.id} item={props.item}>
-                    <EditBox parent={props.item.id} handleEdit={handleEdit} handleMoveBlock={props.handleMoveBlock} />
+                    <EditBox
+                        parent={props.item.id}
+                        handleEdit={handleEdit}
+                        handleMoveBlock={props.handleMoveBlock}
+                        blocks={props.blocks}
+                        handleWriteData={props.handleWriteData}
+                    />
                     <ModalTwoColumns
-                        handleSave={props.handleSave}
                         blocks={props.blocks}
                         triggerOpen={props.item.id === openModalId}
                         handleClose={handleClose}
@@ -72,7 +88,7 @@ export default function Box(props) {
                 triggerOpen={123 === openModalId}
                 handleClose={handleClose}
                 handleWriteData={props.handleWriteData}
-                handleSave={props.handleSave}
+                blocks={props.blocks}
             />
         </>
     );

@@ -107,7 +107,6 @@ export default function App() {
                     key={item.id}
                     item={item}
                     handleMoveBlock={moveBlock}
-                    handleSave={setBlocks}
                     blocks={blocks}
                     handleWriteData={writeData}
                 />

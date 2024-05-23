@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {header, twoColumns} from "../../defaults";
 import { v4 as uuidv4 } from 'uuid';
 
-export default function Add ({ parentId, triggerOpen, handleClose, handleWriteData, handleSave }) {
+export default function Add ({ parentId, triggerOpen, handleClose, handleWriteData, blocks }) {
     const [open, setOpen] = useState(false);
     const [changed, setChanged] = useState(false);
 
@@ -20,23 +20,19 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
 
     const handleSubmit = event => {
         event.preventDefault();
-        handleSave(prevBlocks => {
-            const newData = prevBlocks;
+        const newData = blocks;
 
-            let index = newData.findIndex(obj => obj.id === parentId);
-            let newBlock = formData.blockType === "header" ? header : twoColumns; // future todo
-            newBlock.id = uuidv4();
+        let index = newData.findIndex(obj => obj.id === parentId);
+        let newBlock = formData.blockType === "header" ? header : twoColumns; // future todo
+        newBlock.id = uuidv4();
 
-            if (index !== -1) {
-                newData.splice(index + 1, 0, newBlock);
-            }
+        if (index !== -1) {
+            newData.splice(index + 1, 0, newBlock);
+        }
 
-            const userId = localStorage.getItem('userId');
+        const userId = localStorage.getItem('userId');
 
-            handleWriteData(userId, newData);
-
-            return newData;
-        });
+        handleWriteData(userId, newData);
         handleClose();
     };
 
