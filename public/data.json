@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "type": "header",
     "data": {
       "firstLine": {
@@ -22,7 +22,7 @@
     "position": 1
   },
   {
-    "id": 33,
+    "id": "33",
     "type": "two-columns",
     "data": {
       "one": {
@@ -82,7 +82,7 @@
     }
   },
   {
-    "id": 88,
+    "id": "88",
     "type": "counter",
     "data": {
       "countTo": "2024-09-01 18:00:00",
@@ -114,7 +114,7 @@
     }
   },
   {
-    "id": 55,
+    "id": "55",
     "type": "header",
     "data": {
       "firstLine": {

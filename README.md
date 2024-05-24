@@ -25,7 +25,6 @@ firebase emulators:start --only firestore
 https://wysiwihyg.netlify.app
 
 ### Todo
-- [ ] Remove block
 - [ ] Use useContext()
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
@@ -38,7 +37,7 @@ https://wysiwihyg.netlify.app
 - [ ] Tests
 
 ### Done ✓
-
+- [x] Remove block
 - [x] Think about basic layout for components
 - [x] First component
 - [x] Write some stuff to Readme.md and keep `x` for future task check ;)

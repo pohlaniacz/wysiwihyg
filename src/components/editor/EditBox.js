@@ -2,7 +2,7 @@ import {Button, ButtonGroup} from "@material-tailwind/react";
 
 export default function EditBox(props) {
 
-    const remove = event => { // todo, remove old data from data.json?
+    const remove = event => {
         event.preventDefault();
         const idToRemove = event.target.closest('section').getAttribute('data-id');
 
