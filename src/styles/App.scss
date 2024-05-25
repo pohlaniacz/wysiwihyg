@@ -39,3 +39,8 @@ section.App-twoColumns {
     }
   }
 }
+button[data-action="add"] {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}

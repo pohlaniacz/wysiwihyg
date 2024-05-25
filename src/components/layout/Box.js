@@ -7,7 +7,6 @@ import ModalHeader from "../editor/modal/ModalHeader";
 import WebFont from "webfontloader";
 import TwoColumns from "../editor/TwoColumns";
 import ModalTwoColumns from "../editor/modal/ModalTwoColumns";
-import Add from "../editor/modal/Add";
 
 export default function Box(props) {
 
@@ -82,14 +81,6 @@ export default function Box(props) {
                     />
                 </TwoColumns>
             )}
-
-            <Add
-                parentId={props.item.id}
-                triggerOpen={123 === openModalId}
-                handleClose={handleClose}
-                handleWriteData={props.handleWriteData}
-                blocks={props.blocks}
-            />
         </>
     );
 }

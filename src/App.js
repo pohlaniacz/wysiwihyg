@@ -4,11 +4,14 @@ import Box from "./components/layout/Box";
 import { db } from './components/external/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import {Button} from "@material-tailwind/react";
+import Add from "./components/editor/modal/Add";
 
 export default function App() {
 
     const [data, setData] = React.useState(null);
     const [blocks, setBlocks] = React.useState(null);
+    const [openAddModal, setOpenAddModal] = React.useState(false);
 
     const writeData = async (userId, userData) => {
         try {
@@ -100,6 +103,14 @@ export default function App() {
         setBlocks(newData);
     }
 
+    const handleAdd = () => {
+        setOpenAddModal(true);
+    };
+
+    const handleCloseAddModal = () => {
+        setOpenAddModal(false);
+    };
+
     return (
         <div className="App">
             {blocks.map(item => {
@@ -111,6 +122,24 @@ export default function App() {
                     handleWriteData={writeData}
                 />
             })}
+
+
+            <Button
+                data-parent="123"
+                data-action="add"
+                title="add"
+                onClick={handleAdd}
+            >
+                add +
+            </Button>
+
+
+            <Add
+                triggerOpen={openAddModal}
+                handleClose={handleCloseAddModal}
+                handleWriteData={writeData}
+                blocks={blocks}
+            />
         </div>
     );
 }

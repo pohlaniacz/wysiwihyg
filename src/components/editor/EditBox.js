@@ -49,14 +49,6 @@ export default function EditBox(props) {
                 edit ✎
             </Button>
             <Button
-                data-parent="123"
-                data-action="add"
-                title="add"
-                onClick={props.handleEdit}
-            >
-                add +
-            </Button>
-            <Button
                 data-parent="456"
                 data-action="remove"
                 title="remove"
