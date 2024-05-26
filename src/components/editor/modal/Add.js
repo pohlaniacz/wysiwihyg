@@ -22,18 +22,19 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
         event.preventDefault();
         const newData = blocks;
 
-        let index = newData.findIndex(obj => obj.id === parentId);
         let newBlock = formData.blockType === "header" ? header : twoColumns; // future todo
         newBlock.id = uuidv4();
 
-        if (index !== -1) {
-            newData.splice(index + 1, 0, newBlock);
-        }
+        newData.push(newBlock);
 
         const userId = localStorage.getItem('userId');
 
         handleWriteData(userId, newData);
         handleClose();
+
+        setTimeout(function () {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+        }, 300);
     };
 
     return (

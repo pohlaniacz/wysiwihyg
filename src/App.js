@@ -126,7 +126,7 @@ export default function App() {
 
             <Button
                 data-parent="123"
-                data-action="add"
+                className="addBlock"
                 title="add"
                 onClick={handleAdd}
             >

@@ -39,8 +39,8 @@ section.App-twoColumns {
     }
   }
 }
-button[data-action="add"] {
-  position: fixed;
+button.addBlock {
+  position: fixed !important;
   bottom: 15px;
   right: 15px;
 }
