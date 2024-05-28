@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import {Button} from "@material-tailwind/react";
 import Add from "./components/editor/modal/Add";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 export default function App() {
 
@@ -113,6 +114,17 @@ export default function App() {
 
     return (
         <div className="App">
+
+
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<h1>Main page</h1>}/>
+                    <Route path="/one" element={<h1>One</h1>}/>
+                    <Route path="/two" element={<h1>Two</h1>}/>
+                    <Route path="/three" element={<h1>Three</h1>}/>
+                </Routes>
+            </BrowserRouter>
+
             {blocks.map(item => {
                 return <Box
                     key={item.id}
@@ -123,7 +135,6 @@ export default function App() {
                 />
             })}
 
-
             <Button
                 data-parent="123"
                 className="addBlock"
@@ -132,7 +143,6 @@ export default function App() {
             >
                 add +
             </Button>
-
 
             <Add
                 triggerOpen={openAddModal}
