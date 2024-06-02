@@ -17,8 +17,7 @@ export let header = {
             }
         },
         "image": ""
-    },
-    "position": 1
+    }
 };
 
 

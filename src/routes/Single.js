@@ -4,27 +4,26 @@ import Add from "../components/editor/modal/Add";
 import React from "react";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import {db} from "../components/external/firebase";
-import {v4 as uuidv4} from "uuid";
+import {useParams} from "react-router-dom";
 
 export default function Landing() {
 
-    // let { id } = useParams();
-
+    const { singleId } = useParams();
 
     const [data, setData] = React.useState(null);
     const [blocks, setBlocks] = React.useState(null);
     const [openAddModal, setOpenAddModal] = React.useState(false);
 
-    const writeData = async (userId, userData) => {
+    const writeData = async (userData) => {
         try {
             const checkedData = JSON.parse(JSON.stringify(userData, (key, value) =>
                 value === undefined ? null : value
             ));
 
             if (Array.isArray(checkedData)) {
-                await setDoc(doc(db, "blocks", userId), { items: checkedData });
+                await setDoc(doc(db, "blocks", singleId), { items: checkedData });
             } else {
-                await setDoc(doc(db, "blocks", userId), checkedData);
+                await setDoc(doc(db, "blocks", singleId), checkedData);
             }
             setBlocks(checkedData);
             console.log("Document successfully written!");
@@ -34,38 +33,29 @@ export default function Landing() {
     }
 
     React.useEffect(() => {
-        const loadData = async (userId) => {
+        const loadDefaultData = async () => {
             try {
                 const response = await fetch(process.env.PUBLIC_URL + '/data.json');
                 const data = await response.json();
                 setData(data);
                 setBlocks(data);
 
-                await writeData(userId, data);
+                await writeData(data);
             } catch (error) {
                 console.log(error);
             }
         };
 
         const fetchData = async () => {
-            let userId = localStorage.getItem('userId');
-            if (!userId) {
-                userId = uuidv4();
-                localStorage.setItem('userId', userId);
+            const docRef = doc(db, 'blocks', singleId);
+            const docSnap = await getDoc(docRef);
 
-                // Load data from data.json
-                await loadData(userId);
+            if (docSnap.exists()) {
+                const data = docSnap.data().items;
+                setData(data);
+                setBlocks(data);
             } else {
-                const docRef = doc(db, 'blocks', userId);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data().items;
-                    setData(data);
-                    setBlocks(data);
-                } else {
-                    await loadData(userId);
-                }
+                await loadDefaultData();
             }
         };
 
@@ -77,32 +67,25 @@ export default function Landing() {
     function moveBlock(e) {
         e.stopPropagation();
 
-        const id = Number(e.target.closest('section').getAttribute('data-id'));
+        const id = e.target.closest('section').getAttribute('data-id');
         const type = e.target.getAttribute('data-action');
 
         const newData = JSON.parse(JSON.stringify(blocks));
 
         const currentElementIndex = newData.findIndex(element => element.id === id);
-        const currentElement = newData[currentElementIndex];
 
         if (type === "up") {
             if (currentElementIndex > 0) {
-                const previousElement = newData[currentElementIndex - 1];
-
-                [previousElement.position, currentElement.position] = [currentElement.position, previousElement.position];
-                [newData[currentElementIndex - 1], newData[currentElementIndex]] = [currentElement, previousElement];
+                [newData[currentElementIndex - 1], newData[currentElementIndex]] = [newData[currentElementIndex], newData[currentElementIndex - 1]];
             }
         } else if (type === "down") {
             if (currentElementIndex < newData.length - 1) {
-                const nextElement = newData[currentElementIndex + 1];
-
-                [nextElement.position, currentElement.position] = [currentElement.position, nextElement.position];
-                [newData[currentElementIndex + 1], newData[currentElementIndex]] = [currentElement, nextElement];
+                [newData[currentElementIndex + 1], newData[currentElementIndex]] = [newData[currentElementIndex], newData[currentElementIndex + 1]];
             }
         }
-        newData.sort((a,b) => a.position - b.position)
 
         setBlocks(newData);
+        // to do, save data
     }
 
     const handleAdd = () => {

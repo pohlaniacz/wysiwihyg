@@ -11,7 +11,7 @@ export default function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Landing />}/>
-                    <Route path="/p/:id" element={<Single />}/>
+                    <Route path="/p/:singleId" element={<Single />}/>
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </BrowserRouter>
