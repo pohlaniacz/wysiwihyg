@@ -1,51 +1,24 @@
+import { useEffect, useState, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
+import { doc, setDoc, getDoc } from '@firebase/firestore';
 import Box from "../components/layout/Box";
 import {Button} from "@material-tailwind/react";
 import Add from "../components/editor/modal/Add";
-import React from "react";
-import {doc, getDoc, setDoc} from "firebase/firestore";
 import {db} from "../components/external/firebase";
-import {useParams} from "react-router-dom";
 
 export default function Landing() {
-
     const { singleId } = useParams();
+    const [data, setData] = useState(null);
+    const [blocks, setBlocks] = useState(null);
+    const [openAddModal, setOpenAddModal] = useState(false);
 
-    const [data, setData] = React.useState(null);
-    const [blocks, setBlocks] = React.useState(null);
-    const [openAddModal, setOpenAddModal] = React.useState(false);
+    const writeData = useCallback(async (userData) => {
+        const checkedData = JSON.parse(JSON.stringify(userData, (key, value) => value === undefined ? null : value));
+        await setDoc(doc(db, "blocks", singleId), Array.isArray(checkedData) ? { items: checkedData } : checkedData);
+        setBlocks(checkedData);
+    }, [singleId]);
 
-    const writeData = async (userData) => {
-        try {
-            const checkedData = JSON.parse(JSON.stringify(userData, (key, value) =>
-                value === undefined ? null : value
-            ));
-
-            if (Array.isArray(checkedData)) {
-                await setDoc(doc(db, "blocks", singleId), { items: checkedData });
-            } else {
-                await setDoc(doc(db, "blocks", singleId), checkedData);
-            }
-            setBlocks(checkedData);
-            console.log("Document successfully written!");
-        } catch (error) {
-            console.error("Error writing document: ", error);
-        }
-    }
-
-    React.useEffect(() => {
-        const loadDefaultData = async () => {
-            try {
-                const response = await fetch(process.env.PUBLIC_URL + '/data.json');
-                const data = await response.json();
-                setData(data);
-                setBlocks(data);
-
-                await writeData(data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
+    useEffect(() => {
         const fetchData = async () => {
             const docRef = doc(db, 'blocks', singleId);
             const docSnap = await getDoc(docRef);
@@ -55,37 +28,30 @@ export default function Landing() {
                 setData(data);
                 setBlocks(data);
             } else {
-                await loadDefaultData();
+                const response = await fetch(process.env.PUBLIC_URL + '/data.json');
+                const data = await response.json();
+                setData(data);
+                setBlocks(data);
+                await writeData(data);
             }
         };
-
         fetchData();
-    }, []);
+    }, [singleId, writeData]);
 
     if (!data) return "Loading...";
 
-    function moveBlock(e) {
+    const moveBlock = (e) => {
         e.stopPropagation();
-
         const id = e.target.closest('section').getAttribute('data-id');
         const type = e.target.getAttribute('data-action');
-
-        const newData = JSON.parse(JSON.stringify(blocks));
-
+        const newData = [...blocks];
         const currentElementIndex = newData.findIndex(element => element.id === id);
 
-        if (type === "up") {
-            if (currentElementIndex > 0) {
-                [newData[currentElementIndex - 1], newData[currentElementIndex]] = [newData[currentElementIndex], newData[currentElementIndex - 1]];
-            }
-        } else if (type === "down") {
-            if (currentElementIndex < newData.length - 1) {
-                [newData[currentElementIndex + 1], newData[currentElementIndex]] = [newData[currentElementIndex], newData[currentElementIndex + 1]];
-            }
+        if ((type === "up" && currentElementIndex > 0) || (type === "down" && currentElementIndex < newData.length - 1)) {
+            const swapIndex = type === "up" ? currentElementIndex - 1 : currentElementIndex + 1;
+            [newData[swapIndex], newData[currentElementIndex]] = [newData[currentElementIndex], newData[swapIndex]];
+            writeData(newData);
         }
-
-        setBlocks(newData);
-        // to do, save data
     }
 
     const handleAdd = () => {
@@ -98,15 +64,15 @@ export default function Landing() {
 
     return (
         <>
-            {blocks.map(item => {
-                return <Box
+            {blocks.map(item => (
+                <Box
                     key={item.id}
                     item={item}
                     handleMoveBlock={moveBlock}
                     blocks={blocks}
                     handleWriteData={writeData}
                 />
-            })}
+            ))}
 
             <Button
                 data-parent="123"
