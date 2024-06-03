@@ -59,9 +59,7 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                 : block
         );
 
-        const userId = localStorage.getItem('userId');
-
-        handleWriteData(userId, newData);
+        handleWriteData(newData);
 
         handleClose();
     };

@@ -23,7 +23,7 @@ export default function Box(props) {
 
     function handleEdit(e) {
         e.stopPropagation();
-        setOpenModalId(Number(e.target.closest('button').getAttribute('data-parent')));
+        setOpenModalId(e.target.closest('button').getAttribute('data-parent'));
     }
 
     function handleClose() {

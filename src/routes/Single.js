@@ -14,6 +14,7 @@ export default function Landing() {
 
     const writeData = useCallback(async (userData) => {
         const checkedData = JSON.parse(JSON.stringify(userData, (key, value) => value === undefined ? null : value));
+        console.log(checkedData);
         await setDoc(doc(db, "blocks", singleId), Array.isArray(checkedData) ? { items: checkedData } : checkedData);
         setBlocks(checkedData);
     }, [singleId]);

@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {header, twoColumns} from "../../defaults";
 import { v4 as uuidv4 } from 'uuid';
 
-export default function Add ({ parentId, triggerOpen, handleClose, handleWriteData, blocks }) {
+export default function Add ({ triggerOpen, handleClose, handleWriteData, blocks }) {
     const [open, setOpen] = useState(false);
     const [changed, setChanged] = useState(false);
 
@@ -27,9 +27,7 @@ export default function Add ({ parentId, triggerOpen, handleClose, handleWriteDa
 
         newData.push(newBlock);
 
-        const userId = localStorage.getItem('userId');
-
-        handleWriteData(userId, newData);
+        handleWriteData(newData);
         handleClose();
 
         setTimeout(function () {

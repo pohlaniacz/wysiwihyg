@@ -17,9 +17,7 @@ export default function EditBox(props) {
             newData.splice(index, 1);
         }
 
-        // Write the updated data
-        const userId = localStorage.getItem('userId');
-        props.handleWriteData(userId, newData);
+        props.handleWriteData(newData);
     };
 
     return (

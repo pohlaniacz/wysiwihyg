@@ -46,9 +46,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleFont
                 : block
         );
 
-        const userId = localStorage.getItem('userId');
-
-        handleWriteData(userId, newData);
+        handleWriteData(newData);
 
         handleClose();
     };
