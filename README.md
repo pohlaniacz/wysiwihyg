@@ -25,13 +25,12 @@ firebase emulators:start --only firestore
 https://wysiwihyg.netlify.app
 
 ### Todo
+- [ ] Font is not loaded when loaded (not edited from modal)
 - [ ] Use useContext()
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
 - [ ] Better demo/placeholders
-- [ ] Return saved form to firestore
 - [ ] Welcome modal
-- [ ] Move add button outside top menu
 - [ ] Replace modal component with own component
 - [ ] Translations
 - [ ] Tests
@@ -54,3 +53,5 @@ https://wysiwihyg.netlify.app
 - [x] Firestore + local firestore
 - [x] Modal with choose and add block type
   - [x] Fix, probably id is not necessary
+- [x] Return saved form to firestore
+- [x] Move add button outside top menu

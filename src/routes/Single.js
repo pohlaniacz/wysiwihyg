@@ -31,16 +31,22 @@ export default function Landing() {
                 setBlocks(data);
             } else {
                 let data = [];
-                let header1 = header;
+                let header1 = structuredClone(header);
                 header1.id = uuidv4();
+                header1.data.image = 'https://wysiwihyg.netlify.app/images/header2.jpg';
+                header1.data.firstLine.text = 'Say hi to almost the best (or at least the simplest)';
+                header1.data.firstLine.font.size = 60;
+                header1.data.secondLine.text = 'Web Editor!';
+                header1.data.secondLine.font.size = 60;
                 data.push(header1);
-                let twoColumns1 = twoColumns;
+
+                let twoColumns1 = structuredClone(twoColumns);
                 twoColumns1.id = uuidv4();
                 data.push(twoColumns1);
-                let header2 = header;
+
+                let header2 = structuredClone(header);
                 header2.id = uuidv4();
-                header2.data.image = 'https://wysiwihyg.netlify.app/images/header2.jpg';
-                data.push(header2)
+                data.push(header2);
 
                 setData(data);
                 setBlocks(data);
