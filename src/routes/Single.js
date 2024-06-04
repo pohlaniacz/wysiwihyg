@@ -5,6 +5,8 @@ import Box from "../components/layout/Box";
 import {Button} from "@material-tailwind/react";
 import Add from "../components/editor/modal/Add";
 import {db} from "../components/external/firebase";
+import {header, twoColumns} from "../components/defaults";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Landing() {
     const { singleId } = useParams();
@@ -29,8 +31,18 @@ export default function Landing() {
                 setData(data);
                 setBlocks(data);
             } else {
-                const response = await fetch(process.env.PUBLIC_URL + '/data.json');
-                const data = await response.json();
+                let data = [];
+                let header1 = header;
+                header1.id = uuidv4();
+                data.push(header1);
+                let twoColumns1 = twoColumns;
+                twoColumns1.id = uuidv4();
+                data.push(twoColumns1);
+                let header2 = header;
+                header2.id = uuidv4();
+                header2.data.image = 'https://wysiwihyg.netlify.app/images/header-2.jpg';
+                data.push(header2)
+
                 setData(data);
                 setBlocks(data);
                 await writeData(data);

@@ -16,7 +16,7 @@ export let header = {
                 "size": 40
             }
         },
-        "image": ""
+        "image": "https://wysiwihyg.netlify.app/images/header1.jpg"
     }
 };
 
