@@ -16,7 +16,6 @@ export default function Landing() {
 
     const writeData = useCallback(async (userData) => {
         const checkedData = JSON.parse(JSON.stringify(userData, (key, value) => value === undefined ? null : value));
-        console.log(checkedData);
         await setDoc(doc(db, "blocks", singleId), Array.isArray(checkedData) ? { items: checkedData } : checkedData);
         setBlocks(checkedData);
     }, [singleId]);
@@ -40,7 +39,7 @@ export default function Landing() {
                 data.push(twoColumns1);
                 let header2 = header;
                 header2.id = uuidv4();
-                header2.data.image = 'https://wysiwihyg.netlify.app/images/header-2.jpg';
+                header2.data.image = 'https://wysiwihyg.netlify.app/images/header2.jpg';
                 data.push(header2)
 
                 setData(data);
