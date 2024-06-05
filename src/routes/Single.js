@@ -5,8 +5,9 @@ import Box from "../components/layout/Box";
 import {Button} from "@material-tailwind/react";
 import Add from "../components/editor/modal/Add";
 import {db} from "../components/external/firebase";
-import {header, twoColumns} from "../components/defaults";
-import { v4 as uuidv4 } from 'uuid';
+import {defaultBlocks} from "../components/defaults";
+import {findUniqueFontNames} from "../components/utils/font";
+import WebFont from "webfontloader";
 
 export default function Landing() {
     const { singleId } = useParams();
@@ -24,34 +25,23 @@ export default function Landing() {
         const fetchData = async () => {
             const docRef = doc(db, 'blocks', singleId);
             const docSnap = await getDoc(docRef);
+            let data;
 
             if (docSnap.exists()) {
-                const data = docSnap.data().items;
-                setData(data);
-                setBlocks(data);
+                data = docSnap.data().items;
             } else {
-                let data = [];
-                let header1 = structuredClone(header);
-                header1.id = uuidv4();
-                header1.data.image = 'https://wysiwihyg.netlify.app/images/header2.jpg';
-                header1.data.firstLine.text = 'Say hi to almost the best (or at least the simplest)';
-                header1.data.firstLine.font.size = 60;
-                header1.data.secondLine.text = 'Web Editor!';
-                header1.data.secondLine.font.size = 60;
-                data.push(header1);
-
-                let twoColumns1 = structuredClone(twoColumns);
-                twoColumns1.id = uuidv4();
-                data.push(twoColumns1);
-
-                let header2 = structuredClone(header);
-                header2.id = uuidv4();
-                data.push(header2);
-
-                setData(data);
-                setBlocks(data);
+                data = defaultBlocks();
                 await writeData(data);
             }
+
+            setData(data);
+            setBlocks(data);
+
+            WebFont.load({
+                google: {
+                    families: findUniqueFontNames(data)
+                },
+            });
         };
         fetchData();
     }, [singleId, writeData]);

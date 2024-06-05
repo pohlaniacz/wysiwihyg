@@ -3,7 +3,7 @@ What You See Is What I Hope You Get is a project that will contain react compone
 Todo will be grown as project continues.
 
 ### How to start
-```
+```shell
 ### Project
 npm install
 npm start
@@ -25,12 +25,11 @@ firebase emulators:start --only firestore
 https://wysiwihyg.netlify.app
 
 ### Todo
-- [ ] Font is not loaded when loaded (not edited from modal)
-- [ ] Use useContext()
+- [ ] Upload image to storage in firebase instead of base64
+- [ ] Sort off admin panel? Social login for administrate?
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
 - [ ] Better demo/placeholders
-- [ ] Welcome modal
 - [ ] Replace modal component with own component
 - [ ] Translations
 - [ ] Tests
@@ -55,3 +54,4 @@ https://wysiwihyg.netlify.app
   - [x] Fix, probably id is not necessary
 - [x] Return saved form to firestore
 - [x] Move add button outside top menu
+- [x] Font is not loaded when loaded (not edited from modal)
