@@ -15,7 +15,7 @@ curl -sL https://firebase.tools | bash
 sudo apt install default-jre
 ## MacOs
 # Download and run https://www.oracle.com/java/technologies/downloads/#jdk22-mac [ARM64 DMG Installer]
-firebase emulators:start --only firestore
+firebase emulators:start --only firestore,storage
 
 ### Production
 # Provide credentials for Firestore based on .env.dist and save as .env

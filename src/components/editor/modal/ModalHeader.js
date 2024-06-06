@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-    Button,
-    Dialog,
-    DialogBody,
-    DialogFooter,
-} from "@material-tailwind/react";
+import { Button, Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
 import InputField from "./form/InputField";
 import FontFields from "./form/FontFields";
+import { storage, ref, uploadBytes, getDownloadURL } from "../../external/firebase";  // Adjust the import path accordingly
 
 const lines = ['firstLine', 'secondLine'];
 
@@ -51,14 +47,16 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleFont
         handleClose();
     };
 
-
     const handleChange = ({ target: { name, value, files } }) => {
         if (files) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFormData(prevFormData => ({ ...prevFormData, [name]: reader.result }));
-            };
-            reader.readAsDataURL(files[0]);
+            const file = files[0];
+            const fileRef = ref(storage, file.name);
+
+            uploadBytes(fileRef, file).then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                    setFormData(prevFormData => ({ ...prevFormData, [name]: url }));
+                });
+            });
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
@@ -66,6 +64,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleFont
             handleFontChange(value);
         }
     };
+
 
     return (
         <Dialog open={open} handler={handleClose}>
