@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
 import InputField from "./form/InputField";
 import FontFields from "./form/FontFields";
-import { storage, ref, uploadBytes, getDownloadURL } from "../../external/firebase";  // Adjust the import path accordingly
+import { storage, ref, uploadBytes, getDownloadURL } from "../../external/firebase";
 
 const lines = ['firstLine', 'secondLine'];
 
