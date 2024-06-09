@@ -26,6 +26,7 @@ https://wysiwihyg.netlify.app
 
 ### Todo
 - [ ] Upload image to storage in firebase instead of base64
+  - [ ] Optimize imager
 - [ ] Sort off admin panel? Social login for administrate?
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting

@@ -3,10 +3,13 @@ import { Button, Dialog, DialogBody, DialogFooter } from "@material-tailwind/rea
 import InputField from "./form/InputField";
 import FontFields from "./form/FontFields";
 import { storage, ref, uploadBytes, getDownloadURL } from "../../external/firebase";
+import {useParams} from "react-router-dom";
+import {generateRandomName} from "../../utils/randomName";
 
 const lines = ['firstLine', 'secondLine'];
 
 export default function ModalHeader({ item, triggerOpen, handleClose, handleFontChange, handleWriteData, blocks }) {
+    const { singleId } = useParams();
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(
         lines.reduce((acc, line) => ({
@@ -50,12 +53,16 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleFont
     const handleChange = ({ target: { name, value, files } }) => {
         if (files) {
             const file = files[0];
-            const fileRef = ref(storage, file.name);
+            const randomName = generateRandomName();
+            const filePath = `blocks/${singleId}/${randomName}.jpg`;
+            const fileRef = ref(storage, filePath);
 
             uploadBytes(fileRef, file).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
                     setFormData(prevFormData => ({ ...prevFormData, [name]: url }));
                 });
+            }).catch((error) => {
+                console.error("Image upload failed:", error);
             });
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));

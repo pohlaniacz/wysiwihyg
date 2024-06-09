@@ -7,11 +7,15 @@ import {
 } from "@material-tailwind/react";
 import InputField from "./form/InputField";
 import FontFields from "./form/FontFields";
+import {generateRandomName} from "../../utils/randomName";
+import {getDownloadURL, ref, storage, uploadBytes} from "../../external/firebase";
+import {useParams} from "react-router-dom";
 
 const sections = ['one', 'two'];
 const lines = ['firstLine', 'secondLine', 'paragraph'];
 
 export default function ModalTwoColumns({ item, triggerOpen, handleClose, handleFontChange, handleWriteData, blocks }) {
+    const { singleId } = useParams();
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(
         sections.reduce((acc, section) => ({
@@ -67,11 +71,18 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
 
     const handleChange = ({ target: { name, value, files } }) => {
         if (files) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFormData(prevFormData => ({ ...prevFormData, [name]: reader.result }));
-            };
-            reader.readAsDataURL(files[0]);
+            const file = files[0];
+            const randomName = generateRandomName();
+            const filePath = `blocks/${singleId}/${randomName}.jpg`;
+            const fileRef = ref(storage, filePath);
+
+            uploadBytes(fileRef, file).then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                    setFormData(prevFormData => ({ ...prevFormData, [name]: url }));
+                });
+            }).catch((error) => {
+                console.error("Image upload failed:", error);
+            });
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
