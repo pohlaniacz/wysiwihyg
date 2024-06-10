@@ -16,6 +16,7 @@ export default function Landing() {
     const [openAddModal, setOpenAddModal] = useState(false);
 
     const writeData = useCallback(async (userData) => {
+        console.log('writeData');
         const checkedData = JSON.parse(JSON.stringify(userData, (key, value) => value === undefined ? null : value));
         await setDoc(doc(db, "blocks", singleId), Array.isArray(checkedData) ? { items: checkedData } : checkedData);
         setBlocks(checkedData);
@@ -23,6 +24,7 @@ export default function Landing() {
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log('fetchData');
             const docRef = doc(db, 'blocks', singleId);
             const docSnap = await getDoc(docRef);
             let data;
