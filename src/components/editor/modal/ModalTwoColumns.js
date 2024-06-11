@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
-import {
-    Button,
-    Dialog,
-    DialogBody,
-    DialogFooter,
-} from "@material-tailwind/react";
+import React, {useEffect, useState} from "react";
+import {Button, Dialog, DialogBody, DialogFooter} from "@material-tailwind/react";
 import InputField from "./form/InputField";
 import FontFields from "./form/FontFields";
-import {generateRandomName} from "../../utils/randomName";
-import {getDownloadURL, ref, storage, uploadBytes} from "../../external/firebase";
 import {useParams} from "react-router-dom";
+import {uploadImage} from "../../utils/uploadImage";
+
 
 const sections = ['one', 'two'];
 const lines = ['firstLine', 'secondLine', 'paragraph'];
@@ -30,14 +25,28 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
             [`${section}ImagePosition`]: item.data[section].image.position,
         }), { parentId: item.id })
     );
+    const [imageFiles, setImageFiles] = useState({});
 
     useEffect(() => setOpen(triggerOpen), [triggerOpen]);
 
-    const handleSubmit = event => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const updatedFormData = { ...formData };
+
+        for (const section of sections) {
+            if (imageFiles[section]) {
+                try {
+                    updatedFormData[`${section}ImageSrc`] = await uploadImage(imageFiles[section], singleId);
+                } catch (error) {
+                    console.error("Image upload failed for section:", section, error);
+                    return;
+                }
+            }
+        }
+
         const newData = blocks.map(block =>
-            block.id === formData.parentId
+            block.id === updatedFormData.parentId
                 ? {
                     ...block,
                     data: sections.reduce((acc, section) => ({
@@ -46,16 +55,16 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                             ...lines.reduce((acc2, line) => ({
                                 ...acc2,
                                 [line]: {
-                                    text: formData[`${section}${line}Text`],
+                                    text: updatedFormData[`${section}${line}Text`],
                                     font: {
-                                        name: formData[`${section}${line}FontName`],
-                                        size: formData[`${section}${line}FontSize`]
+                                        name: updatedFormData[`${section}${line}FontName`],
+                                        size: updatedFormData[`${section}${line}FontSize`]
                                     }
                                 },
                             }), {}),
                             image: {
-                                src: formData[`${section}ImageSrc`],
-                                position: formData[`${section}ImagePosition`]
+                                src: updatedFormData[`${section}ImageSrc`],
+                                position: updatedFormData[`${section}ImagePosition`]
                             }
                         }
                     }), {})
@@ -64,25 +73,13 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
         );
 
         handleWriteData(newData);
-
         handleClose();
     };
 
-
     const handleChange = ({ target: { name, value, files } }) => {
         if (files) {
-            const file = files[0];
-            const randomName = generateRandomName();
-            const filePath = `blocks/${singleId}/${randomName}.jpg`;
-            const fileRef = ref(storage, filePath);
-
-            uploadBytes(fileRef, file).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
-                    setFormData(prevFormData => ({ ...prevFormData, [name]: url }));
-                });
-            }).catch((error) => {
-                console.error("Image upload failed:", error);
-            });
+            const section = name.split('ImageSrc')[0];
+            setImageFiles(prevFiles => ({ ...prevFiles, [section]: files[0] }));
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
@@ -102,7 +99,7 @@ export default function ModalTwoColumns({ item, triggerOpen, handleClose, handle
                                 <FontFields key={lineIndex} prefix={`${section}${line}`} formData={formData} handleChange={handleChange} component={item.type} />
                             ))}
                             <InputField id={`${section}ImageSrc`} label="Image (only if want to change)" name={`${section}ImageSrc`} type="file"
-                                        onChange={handleChange}/>
+                                        onChange={handleChange} />
                         </div>
                     ))}
                 </form>

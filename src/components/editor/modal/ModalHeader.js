@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
 import InputField from "./form/InputField";
 import FontFields from "./form/FontFields";
-import { storage, ref, uploadBytes, getDownloadURL } from "../../external/firebase";
-import {useParams} from "react-router-dom";
-import {generateRandomName} from "../../utils/randomName";
+import { useParams } from "react-router-dom";
+import { uploadImage } from "../../utils/uploadImage";
 
 const lines = ['firstLine', 'secondLine'];
 
@@ -19,17 +18,30 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleFont
             [`${line}FontSize`]: item.data[line].font.size,
         }), { parentId: item.id, image: item.data.image })
     );
+    const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => setOpen(triggerOpen), [triggerOpen]);
 
-    const handleSubmit = event => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
+        let imageUrl = formData.image;
+
+        if (imageFile) {
+            try {
+                imageUrl = await uploadImage(imageFile, singleId);
+            } catch (error) {
+                console.error("Image upload failed:", error);
+                return;
+            }
+        }
+
         const newData = blocks.map(block =>
             block.id === formData.parentId
                 ? {
                     ...block,
                     data: {
-                        image: formData.image,
+                        image: imageUrl,
                         ...lines.reduce((acc, line) => ({
                             ...acc,
                             [line]: {
@@ -46,24 +58,13 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleFont
         );
 
         handleWriteData(newData);
-
         handleClose();
     };
 
     const handleChange = ({ target: { name, value, files } }) => {
         if (files) {
             const file = files[0];
-            const randomName = generateRandomName();
-            const filePath = `blocks/${singleId}/${randomName}.jpg`;
-            const fileRef = ref(storage, filePath);
-
-            uploadBytes(fileRef, file).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
-                    setFormData(prevFormData => ({ ...prevFormData, [name]: url }));
-                });
-            }).catch((error) => {
-                console.error("Image upload failed:", error);
-            });
+            setImageFile(file);
         } else {
             setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
         }
@@ -71,7 +72,6 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleFont
             handleFontChange(value);
         }
     };
-
 
     return (
         <Dialog open={open} handler={handleClose}>
@@ -81,7 +81,7 @@ export default function ModalHeader({ item, triggerOpen, handleClose, handleFont
                         <FontFields key={lineIndex} prefix={line} formData={formData} handleChange={handleChange} component={item.type} />
                     ))}
                     <InputField id="image" label="Image (only if want to change)" name="image" type="file"
-                                onChange={handleChange}/>
+                                onChange={handleChange} />
                 </form>
             </DialogBody>
             <DialogFooter>
