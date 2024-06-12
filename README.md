@@ -25,8 +25,7 @@ firebase emulators:start --only firestore,storage
 https://wysiwihyg.netlify.app
 
 ### Todo
-- [ ] Upload image to storage in firebase instead of base64
-  - [ ] Optimize imager
+- [ ] Optimize image upload
 - [ ] Sort off admin panel? Social login for administrate?
 - [ ] Modal with input to paste user id received earlier
 - [ ] Block with counting
@@ -56,3 +55,4 @@ https://wysiwihyg.netlify.app
 - [x] Return saved form to firestore
 - [x] Move add button outside top menu
 - [x] Font is not loaded when loaded (not edited from modal)
+- [x] Upload image to storage in firebase instead of base64
