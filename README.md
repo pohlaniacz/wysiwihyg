@@ -26,6 +26,7 @@ firebase emulators:start --only firestore,storage,auth
 https://wysiwihyg.netlify.app
 
 ### Todo
+- [ ] Login/register with firebase
 - [ ] Optimize image upload
 - [ ] Sort off admin panel? Social login for administrate?
 - [ ] Modal with input to paste user id received earlier

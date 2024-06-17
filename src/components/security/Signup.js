@@ -24,8 +24,6 @@ const Signup = () => {
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
             });
-
-
     }
 
     return (
