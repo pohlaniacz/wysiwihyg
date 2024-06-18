@@ -30,7 +30,7 @@ const Signup = () => {
         <main >
             <section>
                 <div>
-                    <div className="relative isolate px-6 pt-14 lg:px-8">
+                    <div className="relative isolate px-6 pt-14 lg:px-8 ">
                         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                             <form>
                                 <div className="space-y-12">
@@ -40,15 +40,15 @@ const Signup = () => {
                                             This information will be displayed publicly so be careful what you share.
                                         </p>
 
-                                        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                        <div className="mt-10 grid grid-cols-1">
                                             <div className="sm:col-span-4">
                                                 <label htmlFor="username"
                                                        className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Username
+                                                    E-mail
                                                 </label>
                                                 <div className="mt-2">
                                                     <div
-                                                        className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                                        className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md mx-auto">
                                                         <input
                                                             type="email"
                                                             value={email}
@@ -62,7 +62,7 @@ const Signup = () => {
                                             </div>
                                         </div>
 
-                                        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                        <div className="mt-10 grid grid-cols-1">
                                             <div className="sm:col-span-4">
                                                 <label htmlFor="username"
                                                        className="block text-sm font-medium leading-6 text-gray-900">
@@ -70,7 +70,7 @@ const Signup = () => {
                                                 </label>
                                                 <div className="mt-2">
                                                     <div
-                                                        className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                                        className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md mx-auto">
                                                         <input
                                                             type="password"
                                                             value={password}
@@ -89,13 +89,14 @@ const Signup = () => {
                                 <button
                                     type="submit"
                                     onClick={onSubmit}
+                                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Sign up
                                 </button>
                             </form>
                         </div>
 
-                        <p>
+                        <p className="text-sm text-center">
                             Already have an account?{' '}
                             <NavLink to="/s/login">
                                 Sign in
