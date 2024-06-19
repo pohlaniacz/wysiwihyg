@@ -1,4 +1,7 @@
-![alt text](https://raw.githubusercontent.com/pohlaniacz/wysiwihyg/main/public/logo.png)
+<div align="center">
+    <img src="public/logo.png" alt="wysiwihyg logo">
+</div>
+
 What You See Is What I Hope You Get is a project that will contain react components which can by used to build simple site.
 Todo will be grown as project continues.
 
