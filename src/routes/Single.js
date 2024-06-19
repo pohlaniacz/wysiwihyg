@@ -18,8 +18,10 @@ export default function Landing() {
     const writeData = useCallback(async (userData) => {
         console.log('writeData');
         const checkedData = JSON.parse(JSON.stringify(userData, (key, value) => value === undefined ? null : value));
-        await setDoc(doc(db, "blocks", singleId), Array.isArray(checkedData) ? { items: checkedData } : checkedData);
-        setBlocks(checkedData);
+        const dataToSave = { items: checkedData, user: null };
+        await setDoc(doc(db, "blocks", singleId), dataToSave);
+        setBlocks(dataToSave.items);
+        console.log(dataToSave);
     }, [singleId]);
 
     useEffect(() => {
@@ -30,14 +32,15 @@ export default function Landing() {
             let data;
 
             if (docSnap.exists()) {
-                data = docSnap.data().items;
+                data = docSnap.data();
             } else {
                 data = defaultBlocks();
                 await writeData(data);
             }
+            console.log(data);
 
             setData(data);
-            setBlocks(data);
+            setBlocks(data.items);
 
             WebFont.load({
                 google: {

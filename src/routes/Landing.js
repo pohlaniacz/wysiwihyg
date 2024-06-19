@@ -26,7 +26,6 @@ export default function Landing() {
                 console.log("user is not logged")
             }
         });
-
     }, [])
 
 

@@ -19,7 +19,10 @@ export function defaultBlocks() {
     header2.id = uuidv4();
     data.push(header2);
 
-    return data;
+    return {
+        items: data,
+        user: null
+    };
 }
 
 export let header = {
