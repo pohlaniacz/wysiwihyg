@@ -29,6 +29,10 @@ firebase emulators:start --only firestore,storage,auth
 https://wysiwihyg.netlify.app
 
 ### Todo
+- [ ] Better add button, I mean more visible
+- [ ] Cob button for future settings
+- [ ] Google map
+- [ ] Alias stuff?
 - [ ] Optimize image upload
 - [ ] Sort off admin panel? Social login for administrate?
 - [ ] Modal with input to paste user id received earlier
