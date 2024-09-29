@@ -23,7 +23,7 @@ export default function Landing() {
         const dataToSave = { items: checkedData, user: user ? user.uid : null };
         await setDoc(doc(db, "blocks", singleId), dataToSave);
         setBlocks(dataToSave.items);
-    }, [singleId]);
+    }, [singleId, user]);
 
     useEffect(() => {
         const fetchData = async () => {
