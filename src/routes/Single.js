@@ -8,9 +8,11 @@ import {db} from "../components/external/firebase";
 import {defaultBlocks} from "../components/defaults";
 import {findUniqueFontNames} from "../components/utils/font";
 import WebFont from "webfontloader";
+import {useAuth} from "../hooks/useAuth";
 
 export default function Landing() {
     const { singleId } = useParams();
+    const { user, loading } = useAuth();
     const [data, setData] = useState(null);
     const [blocks, setBlocks] = useState(null);
     const [openAddModal, setOpenAddModal] = useState(false);
@@ -18,10 +20,9 @@ export default function Landing() {
     const writeData = useCallback(async (userData) => {
         console.log('writeData');
         const checkedData = JSON.parse(JSON.stringify(userData, (key, value) => value === undefined ? null : value));
-        const dataToSave = { items: checkedData, user: null };
+        const dataToSave = { items: checkedData, user: user ? user.uid : null };
         await setDoc(doc(db, "blocks", singleId), dataToSave);
         setBlocks(dataToSave.items);
-        console.log(dataToSave);
     }, [singleId]);
 
     useEffect(() => {
@@ -33,9 +34,11 @@ export default function Landing() {
 
             if (docSnap.exists()) {
                 data = docSnap.data();
+                console.log('exists');
             } else {
                 data = defaultBlocks();
-                await writeData(data);
+                await writeData(data.items);
+                console.log('not exists');
             }
             console.log(data);
 
@@ -51,7 +54,7 @@ export default function Landing() {
         fetchData();
     }, [singleId, writeData]);
 
-    if (!data) return "Loading...";
+    if (!data || loading) return "Loading...";
 
     const moveBlock = (e) => {
         e.stopPropagation();
@@ -75,9 +78,11 @@ export default function Landing() {
         setOpenAddModal(false);
     };
 
+    console.log(blocks);
+
     return (
         <>
-            {blocks.map(item => (
+            {blocks && blocks.map(item => (
                 <Box
                     key={item.id}
                     item={item}

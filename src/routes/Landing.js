@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../components/external/firebase';
+import UserPages from './UserPages';
+import {useAuth} from "../hooks/useAuth";
 
 export default function Landing() {
-
     const navigate = useNavigate();
+    const { user, loading } = useAuth();
 
     const redirectToUuidPage = (e) => {
         const uuid = uuidv4();
@@ -14,20 +13,7 @@ export default function Landing() {
         e.preventDefault();
     };
 
-    useEffect(()=>{
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                const uid = user.uid;
-                // ...
-                console.log("uid", uid)
-            } else {
-                console.log("user is not logged")
-            }
-        });
-    }, [])
-
+    if (loading) return <div>Loading...</div>;
 
     return (
         <div className="bg-white">
@@ -77,6 +63,7 @@ export default function Landing() {
                                 Create <span aria-hidden="true">+</span>
                             </button>
                         </div>
+                        {user && <UserPages userId={user.uid} />}
                     </div>
                 </div>
                 <div
